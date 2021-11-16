@@ -1,0 +1,53 @@
+﻿@model Project_EF.Models.ParentCate
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ParentCate</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.name_prcate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.name_prcate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.image_prcate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.image_prcate)
+        </dd>
+        < dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Course Title</th>
+                    <th>Grade</th>
+                </tr>
+                @foreach (var item in Model.Category)
+                {
+                    < tr >
+                    < td >
+                    @Html.DisplayFor(modelItem => item.Id)
+                    </ td >
+                    < td >
+                    @Html.DisplayFor(modelItem => item.name_cate)
+                    </ td >
+                    </ tr >
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

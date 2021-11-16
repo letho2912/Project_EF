@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Project_EF.Models.Product>
+
+<div class="product-home">
+    <div class="pagewrap">
+        <h3 class="h3-title"><span>Sản phẩm nổi bật</span></h3>
+        @foreach (var product in Model)
+        {
+            <div class="product-main">
+                <div class="pro-wrap">
+                    <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
+                    <div class="name-pro">@product.name_product</div>
+                    <div class="price-pro">
+                        <div class="sale">@string.Format("{0:#,##0.##}", product.sale)đ</div>
+                        <div class="price">@string.Format("{0:#,##0.##}", product.price)đ</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

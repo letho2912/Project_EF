@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Project_EF.Models.ParentCate>
+
+<ul>
+    <li><a href="#" title="Trang chủ" class="active">Trang chủ</a></li>
+    <li><a href="#" title="Giới thiệu">Giới thiệu</a></li>
+    <li>
+        <a href="#" title="Sản phẩm">Sản phẩm</a>
+        <!-- menu con sổ xuống cấp 1 -->
+        <ul>
+            @foreach (var prcate in Model)
+            {
+                <li>
+                    <a asp-area="" asp-action="ListProduct" asp-controller="Product" 
+                      asp-route-id="@prcate.Id" title="@prcate.name_prcate">@prcate.name_prcate</a>
+                    <!-- menu con sổ ngang cấp 2 -->
+
+                    <ul>
+                        @for (int i = 0; i < prcate.Category.Count; i++)
+                        {
+                            <li><a asp-area="" asp-action="ListProducts" asp-controller="Product" 
+                                asp-route-id="@prcate.Category.ToList()[i].Id" title="@prcate.name_prcate" title="Sofa">
+                                @prcate.Category.ToList()[i].name_cate</a></li>
+                        }
+                    </ul>
+                </li>
+                }
+            </ul>
+    </li>
+    <li>
+        <a href="#" title="Tin tức">Tin tức</a>
+        <ul>
+            <li><a href="#" title="Tin liên quan">Tin liên quan</a></li>
+            <li><a href="#" title="Tin khuyến mãi">Tin khuyến mãi</a></li>
+        </ul>
+    </li>
+    <li><a href="#" title="Liên hệ">Liên hệ</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <div class="box">
+        <form class="sbox" action="/search" method="get">
+            <input class="stext" type="text" name="q" placeholder="Tìm kiếm...">
+            <a class="sbutton" type="submit" href="javascript:void(0);">
+                <i class="fa fa-search"></i>
+            </a>
+        </form>
+    </div>
+    <li>
+        <a href="#" title="Tài khoản">Tài khoản</a>
+        <ul class="login">
+            <li><a href="#" title="Đăng nhập">Đăng nhập</a></li>
+            <li><a asp-controller="User" asp-action="Register" title="Đăng kí">Đăng kí</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Giỏ hàng(0)</a></li>
+</ul>

@@ -1,0 +1,85 @@
+﻿@model Project_EF.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="name_product" class="control-label"></label>
+                <input asp-for="name_product" class="form-control" />
+                <span asp-validation-for="name_product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="describe" class="control-label"></label>
+                <input asp-for="describe" class="form-control" />
+                <span asp-validation-for="describe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label"></label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sale" class="control-label"></label>
+                <input asp-for="sale" class="form-control" />
+                <span asp-validation-for="sale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="count_pr" class="control-label"></label>
+                <input asp-for="count_pr" class="form-control" />
+                <span asp-validation-for="count_pr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="producer" class="control-label"></label>
+                <input asp-for="producer" class="form-control" />
+                <span asp-validation-for="producer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="date_add" class="control-label"></label>
+                <input asp-for="date_add" class="form-control" />
+                <span asp-validation-for="date_add" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="image_product" class="control-label"></label>
+                <input asp-for="image_product" class="form-control" />
+                <span asp-validation-for="image_product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentCateId" class="control-label"></label>
+                <select asp-for="ParentCateId" class="form-control" asp-items="ViewBag.ParentCateId"></select>
+                <span asp-validation-for="ParentCateId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

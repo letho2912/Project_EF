@@ -1,0 +1,45 @@
+﻿@model Project_EF.Models.User
+@{
+    ViewData["Title"] = "Đăng kí";
+    <link rel="stylesheet" href="~/css/register.css" />
+    Layout = "";
+}
+
+<div class="signup">
+    <div class="signup-connect">
+        <img src="https://xaynhasaigon.vn/wp-content/uploads/2017/09/noi-that-nha-hien-dai-6.jpg" alt="">
+    </div>
+    <div class="signup-classic">
+        <form class="form" asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <fieldset class="fullname">
+                <input type="text" asp-for="fullname" placeholder="Họ và tên" />
+                <span asp-validation-for="fullname" class="text-danger"></span>
+            </fieldset>
+            <fieldset class="username">
+                <input type="text" asp-for="username" placeholder="Tên đăng nhập" />
+                <span asp-validation-for="username" class="text-danger"></span>
+            </fieldset>
+            <fieldset class="email">
+                <input type="email" asp-for="email" placeholder="Địa chỉ email" />
+                <span asp-validation-for="email" class="text-danger"></span>
+
+            </fieldset>
+            <fieldset class="phone">
+                <input type="text" asp-for="phone" placeholder="Số điện thoại" />
+                <span asp-validation-for="phone" class="text-danger"></span>
+            </fieldset>
+            <fieldset class="password">
+                <input type="password" asp-for="password" placeholder="Mật khẩu" />
+                <span asp-validation-for="password" class="text-danger"></span>
+
+            </fieldset>
+            <button type="submit" class="btn">Đăng kí</button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
