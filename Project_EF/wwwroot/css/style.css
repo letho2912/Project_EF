@@ -75,15 +75,23 @@ nav {
     nav > ul li {
         list-style: none;
     }
-
-        nav > ul li a {
-            display: block;
-            padding: 0 25px;
-            line-height: 50px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-        }
+    nav> ul .box {
+        padding-left: 100px;
+    }
+    nav > ul > li.account-main {
+        padding-left: 100px;
+    }
+    nav > ul > li.displayname-account {
+        padding-left: 80px;
+    }
+    nav > ul li a {
+        display: block;
+        padding: 0 25px;
+        line-height: 50px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+    }
         /* Khi hover đến li, tô màu cho thẻ a */
         nav > ul li ul li a {
             display: block;
@@ -258,3 +266,236 @@ h3.h3-title {
         font-size: 14px;
         text-decoration: line-through;
     }
+    /*Thanh link*/
+.link-all a {
+    text-decoration: none;
+    color: rgb(91, 92, 92);
+}
+
+.link-all {
+    height: 40px;
+   
+    display: inline;
+    padding: 10px 0px 10px 0px;
+    font-size: 17px;
+    margin-left:70px;
+}
+
+    .link-all span.lk::after {
+        padding-left: 5px;
+        font-family: FontAwesome;
+        content: '\f105';
+    }
+
+    .link-all a:hover {
+        color: crimson;
+    }
+
+    .link-all i.fas.fa-home {
+        color: rgb(145, 151, 151);
+    }
+
+a.act {
+    color: chocolate;
+}
+      
+/*Trang chi tiết*/
+.mainDetails {
+    padding: 3px 0px 20px 15px;
+}
+
+.detailsProduct {
+    margin-right: 25px;
+    display: flex;
+}
+
+.imgProduct {
+    width: 60%;
+    padding-right: 30px;
+    height:350px;
+}
+
+.infoProduct {
+    width: 40%;
+}
+
+.nameProduct {
+    font-size: 19px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.priceProduct, .discount, .detailsInfo {
+    display: flex;
+}
+
+.saleProduct {
+    color: red;
+    font-size: 18px;
+    padding-right: 30px;
+    font-weight: 700;
+}
+
+.oldPrice {
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+.tag {
+    background: #00ac9f;
+    padding: 2px 8px;
+    color: #fff;
+    letter-spacing: .5px;
+    font-size: 14px;
+    position: relative;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.material, .color {
+    font-size: 15px;
+    font-style: italic;
+    padding: 10px 25px 0px 0px;
+}
+
+.guarantee, .brand {
+    font-size: 15px;
+    font-style: italic;
+    padding: 0px 25px 0px 0px;
+}
+
+.pz {
+    border: solid 1px #f68d91;
+    border-radius: 5px;
+    margin-bottom: 19px;
+    padding: 15px 0 5px;
+}
+
+    .pz .a {
+        position: absolute;
+        z-index: 1;
+        width: 270px;
+        margin-left: 50px;
+        line-height: 30px;
+        margin-top: -31px;
+        background-color: #fff;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .pz .c {
+        background: url(https://noithatluxcasa.com/images/icons/ie.png) no-repeat 10px 1px;
+        padding-left: 24px;
+        padding-bottom: 8px;
+        font-size: 12px;
+        background-size: auto 13px;
+    }
+
+.add {
+    padding-top: 30px;
+    margin-top: 5px;
+}
+
+.productGuarantee {
+    line-height: 36px;
+    background: url(https://noithatluxcasa.com/images/icons/ip.png) no-repeat left top;
+    padding-left: 40px;
+    background-size: auto 33px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    color: #da0d1e;
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+
+.duoi {
+    position: relative;
+    overflow: hidden;
+}
+
+    .duoi img {
+        width: 120px;
+        height: auto;
+        padding-left: 5px;
+        margin-top: 10px;
+    }
+
+.buttonDetail {
+    display: flex;
+    margin-top: 25px;
+    padding: 20px;
+}
+
+.mainProduct {
+    width: 100%;
+}
+
+.description {
+    margin: 15px 15px 20px 0px;
+    padding: 30px;
+}
+
+.detailsTitle {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.dg {
+    display: block;
+    height: 2px;
+    background-color: #e2e2e2;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+    .dg em {
+        display: block;
+        height: 2px;
+        width: 170px;
+        overflow: hidden;
+        background-color: #c00b0b;
+    }
+/*Sản phẩm liên quan*/
+.newDetails {
+    width: 22%;
+    border: 1px solid rgb(241, 238, 238);
+}
+
+.productRight {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    background: #333;
+    color: white;
+    line-height: 30px;
+    padding: 10px;
+}
+
+.relatedProduct {
+    padding: 10px;
+}
+
+.imgRelated img {
+    width: auto;
+    height: auto;
+}
+
+.saleRelate {
+    color: rgb(51, 224, 51);
+    font-weight: 500;
+    font-size: 16px;
+    padding: 15px;
+}
+
+.oldRelate {
+    text-decoration: line-through;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.detailsRelated {
+    border: 1px solid rgb(233, 228, 228);
+}

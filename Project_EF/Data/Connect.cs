@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_EF.Data
 {
-    public class Connect:DbContext
+    public class Connect : DbContext
     {
         public Connect(DbContextOptions<Connect> options) : base(options)
         {

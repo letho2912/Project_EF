@@ -8,7 +8,7 @@
             <div class="product-main">
                 <div class="pro-wrap">
                     <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
-                    <div class="name-pro">@product.name_product</div>
+                    <div class="name-pro"><a asp-action="Details" asp-route-id="@product.Id">@product.name_product</a></div>
                     <div class="price-pro">
                         <div class="sale">@string.Format("{0:#,##0.##}", product.sale)đ</div>
                         <div class="price">@string.Format("{0:#,##0.##}", product.price)đ</div>

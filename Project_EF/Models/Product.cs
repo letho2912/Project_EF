@@ -35,8 +35,10 @@ CategoryId int,*/
         public double price { get; set; }
         [DisplayName("Giá bán")]
         public double sale { get; set; }
-        [DisplayName("Số lượng")]
-        public int count_pr { get; set; }
+        [DisplayName("Bảo hành")]
+        public string quarantee { get; set; }
+        [DisplayName("Chất liệu")]
+        public string material { get; set; }
         [DisplayName("Nhà sản xuất")]
         public string producer { get; set; }
         [DisplayName("Tình trạng")]

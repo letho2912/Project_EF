@@ -10,21 +10,24 @@
             @foreach (var prcate in Model)
             {
                 <li>
-                    <a asp-area="" asp-action="ListProduct" asp-controller="Product" 
-                      asp-route-id="@prcate.Id" title="@prcate.name_prcate">@prcate.name_prcate</a>
+                    <a asp-area="" asp-action="ListProduct" asp-controller="Product"
+                       asp-route-id="@prcate.Id" title="@prcate.name_prcate">@prcate.name_prcate</a>
                     <!-- menu con sổ ngang cấp 2 -->
 
                     <ul>
                         @for (int i = 0; i < prcate.Category.Count; i++)
                         {
-                            <li><a asp-area="" asp-action="ListProducts" asp-controller="Product" 
-                                asp-route-id="@prcate.Category.ToList()[i].Id" title="@prcate.name_prcate" title="Sofa">
-                                @prcate.Category.ToList()[i].name_cate</a></li>
+                            <li>
+                                <a asp-area="" asp-action="ListProducts" asp-controller="Product"
+                                   asp-route-id="@prcate.Category.ToList()[i].Id" title="@prcate.name_prcate" title="Sofa">
+                                    @prcate.Category.ToList()[i].name_cate
+                                </a>
+                            </li>
                         }
                     </ul>
                 </li>
-                }
-            </ul>
+            }
+        </ul>
     </li>
     <li>
         <a href="#" title="Tin tức">Tin tức</a>
@@ -34,10 +37,6 @@
         </ul>
     </li>
     <li><a href="#" title="Liên hệ">Liên hệ</a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
     <div class="box">
         <form class="sbox" action="/search" method="get">
             <input class="stext" type="text" name="q" placeholder="Tìm kiếm...">
@@ -46,12 +45,25 @@
             </a>
         </form>
     </div>
-    <li>
-        <a href="#" title="Tài khoản">Tài khoản</a>
-        <ul class="login">
-            <li><a href="#" title="Đăng nhập">Đăng nhập</a></li>
-            <li><a asp-controller="User" asp-action="Register" title="Đăng kí">Đăng kí</a></li>
-        </ul>
-    </li>
+    @if (@ViewBag.displayname == null)
+    {
+        <li class="account-main">
+            <a href="#" title="Tài khoản">Tài khoản</a>
+            <ul class="login">
+                <li><a asp-controller="User" asp-action="Login" title="Đăng nhập">Đăng nhập</a></li>
+                <li><a asp-controller="User" asp-action="Register" title="Đăng kí">Đăng kí</a></li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="displayname-account">
+            <a href="#" title="@ViewBag.displayname">@ViewBag.displayname</a>
+            <ul class="login">
+                <li><a asp-controller="User" asp-action="Login" title="Đăng nhập">Cài đặt</a></li>
+                <li><a asp-controller="User" asp-action="Logout" title="Đăng kí">Đăng xuất</a></li>
+            </ul>
+        </li>
+    }
     <li><a href="#">Giỏ hàng(0)</a></li>
 </ul>
