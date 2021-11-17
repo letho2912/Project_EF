@@ -1,0 +1,125 @@
+﻿@model Project_EF.Models.Product
+<div class="link-all">
+    @if (Model.CategoryId != null)
+    {
+        <i class="fas fa-home"></i><a href="#">Trang chủ</a><span class="lk"></span>
+        <a href="#">Sản phẩm</a><span class="lk"></span>
+        <a class="lk" href="#">@Html.DisplayFor(model => model.ParentCate.name_prcate)</a><span class="lk"></span>
+        <a class="act" href="#">@Html.DisplayFor(model => model.Category.name_cate)</a><span class="lk"></span>
+        <a class="act" href="#">@Html.DisplayFor(model => model.name_product)</a>
+    }
+    else
+    {
+        <i class="fas fa-home"></i><a href="#">Trang chủ</a><span class="lk"></span>
+        <a href="#">Sản phẩm</a><span class="lk"></span>
+        <a class="lk" href="#">@Html.DisplayFor(model => model.ParentCate.name_prcate)</a><span class="lk"></span>
+        <a class="act" href="#">@Html.DisplayFor(model => model.name_product)</a>
+    }
+</div>
+<div class="main-container">
+    <div class="mainDetails">
+        <div class="mainProduct">
+            <div class="detailsProduct">
+                <div class="imgProduct">
+                    <img class="d-block w-100"
+                         src="~/images/@Html.DisplayFor(model => model.image_product)"
+                         alt="Hình ảnh thiết kế nội thất">
+                    <div class="duoi">
+                        <img alt=""
+                             src="https://noithattayho.vn/wp-content/uploads/2020/12/mau-thiet-ke-noi-that-can-ho-100m2-3.jpg">
+                        <img alt=""
+                             src="https://noithattayho.vn/wp-content/uploads/2020/12/mau-thiet-ke-noi-that-can-ho-100m2-3.jpg">
+                        <img alt=""
+                             src="https://noithattayho.vn/wp-content/uploads/2020/12/mau-thiet-ke-noi-that-can-ho-100m2-3.jpg">
+                        <img alt=""
+                             src="https://noithattayho.vn/wp-content/uploads/2020/12/mau-thiet-ke-noi-that-can-ho-100m2-3.jpg">
+                    </div>
+                </div>
+                <div class="infoProduct">
+                    <span class="productGuarantee"><b>Sản phẩm</b> bảo hành bảo trì trên 2 năm</span>
+                    <p class="nameProduct">
+                        @Html.DisplayFor(model => model.name_product)
+                    </p>
+                    <div class="priceProduct">
+                        <p class="saleProduct">
+                            @string.Format("{0:#,##0.##}", Model.sale)đ
+                        </p>
+                        <p class="oldPrice">
+                            Giá gốc: @string.Format("{0:#,##0.##}", Model.price)đ
+                        </p>
+                    </div>
+                    <div class="discount">
+                        <span>
+                            (Tiết kiệm: <strong>
+                                @string.Format("{0:#,##0.##}", Model.price - Model.sale)đ
+                            </strong> )
+                        </span>
+                        <div class="tag">
+                            17%
+                        </div>
+                    </div>
+                    <div class="detailsInfo">
+                        <div class="material">
+                            <li>
+                                @Html.DisplayNameFor(model => model.material): @Html.DisplayFor(model => model.material)
+                            </li>
+                        </div>
+                        <div class="color">
+                            <li>
+                                @Html.DisplayNameFor(model => model.quarantee): @Html.DisplayFor(model => model.quarantee)
+                            </li>
+                        </div>
+                    </div>
+                    <div class="detailsInfo">
+                        <div class="guarantee">
+                            <li>
+                                @Html.DisplayNameFor(model => model.producer): @Html.DisplayFor(model => model.producer)
+                            </li>
+                        </div>
+                        <div class="brand">
+                            <li>
+                                @Html.DisplayNameFor(model => model.quarantee):  @Html.DisplayFor(model => model.quarantee)
+                            </li>
+                        </div>
+                    </div>
+                    <div class="add">
+                        <div class="pz">
+                            <span class="a">Hệ thống chính hãng</span>
+                            <li class="c">28/168 Trần Phú, Phước Vĩnh, Huế</li>
+                            <li class="c">Tiên Phong, Tiên Phước, Quảng Nam</li>
+                        </div>
+                    </div>
+                    <div class="buttonDetail">
+                        <button class="btn btn-success" style="margin-right:20px ;">Thêm vào giỏ hàng</button>
+                        <button class="btn btn-danger">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <b class="detailsTitle">
+                    Chi tiết sản phẩm
+                </b>
+                <span class="dg"><em></em></span>
+                @Html.Raw(Model.describe)
+            </div>
+        </div>
+        <div class="pagewrap">
+            <h3 class="h3-title"><span>Sản phẩm liên quan</span></h3>
+
+            @foreach (var related in ViewBag.listrelated)
+            {
+                <div class="product-main">
+                    <div class="pro-wrap">
+                        <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
+                        <div class="name-pro"><a asp-action="Details" asp-route-id="@related.Id">@related.name_product</a></div>
+                        <div class="price-pro">
+                            <div class="sale">@string.Format("{0:#,##0.##}", related.sale)đ</div>
+                            <div class="price">@string.Format("{0:#,##0.##}", related.price)đ</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        </div>
+    </div>
+</div>

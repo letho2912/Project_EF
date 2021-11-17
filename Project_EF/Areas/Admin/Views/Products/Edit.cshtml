@@ -35,9 +35,14 @@
                 <span asp-validation-for="sale" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="count_pr" class="control-label"></label>
-                <input asp-for="count_pr" class="form-control" />
-                <span asp-validation-for="count_pr" class="text-danger"></span>
+                <label asp-for="quarantee" class="control-label"></label>
+                <input asp-for="quarantee" class="form-control" />
+                <span asp-validation-for="quarantee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="material" class="control-label"></label>
+                <input asp-for="material" class="form-control" />
+                <span asp-validation-for="quarantee" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="producer" class="control-label"></label>
@@ -46,7 +51,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" />
+                <select asp-for="status" class="form-control">
+                    <option selected>Hàng mới</option>
+                    <option>Hàng order</option>
+                    <option>Hết hàng</option>
+                </select>
                 <span asp-validation-for="status" class="text-danger"></span>
             </div>
             <div class="form-group">

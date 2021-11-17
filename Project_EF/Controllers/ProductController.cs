@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project_EF.Data;
 using Project_EF.Models;
 using System;
@@ -11,6 +12,7 @@ namespace Project_EF.Controllers
     public class ProductController : Controller
     {
         private readonly Connect _db;
+        public Product Product { get; set; }
         public ProductController(Connect db)
         {
             _db = db;
@@ -25,5 +27,31 @@ namespace Project_EF.Controllers
             IEnumerable<Product> b = _db.Product.Where(b => b.CategoryId == id);
             return View(b);
         }
+        [HttpGet]         
+        public IActionResult Details(int id)
+        {
+            var detail = getDetails(id);
+            int idd = id;
+            var query = _db.Product
+                .FromSqlRaw("select top 4 * from Product where ParentCateId = (select ParentCateId from Product where Id ={0})", idd)
+                .ToList();
+
+            ViewBag.listrelated = query;
+
+
+            return View("Details", detail);
+           
+
+        }
+
+        private Product getDetails(int id)
+        {
+            var detail = _db.Product.
+                Include(s=>s.ParentCate)
+                .ThenInclude(m=>m.Category)
+                .Where(b => b.Id == id).FirstOrDefault();
+            return detail;
+        }
+        
     }
 }

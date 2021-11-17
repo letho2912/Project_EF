@@ -140,7 +140,7 @@ namespace Project_EF.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,name_product,describe,price,sale,count_pr,producer,status,date_add,image_product,ParentCateId,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,name_product,describe,price,sale,quarantee,producer,status,date_add,image_product,ParentCateId,CategoryId")] Product product)
         {
             if (id != product.Id)
             {

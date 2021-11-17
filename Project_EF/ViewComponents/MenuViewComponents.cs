@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Project_EF.Models;
 
 namespace Project_EF.ViewComponents
 {
@@ -22,6 +24,10 @@ namespace Project_EF.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
+            ViewBag.displayname = HttpContext.Session.GetString("displayname");
+            ViewBag.userId = HttpContext.Session.GetString("userId");
+           // HttpContext.Session.SetString("displayname", us.fullname);
+            //HttpContext.Session.SetString("userId", us.Id.ToString());
             var c = _db.ParentCate.OrderBy(p => p.Id).Include(p => p.Category);
             return View("Menu",c);
         }
