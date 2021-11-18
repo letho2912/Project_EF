@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,15 +26,57 @@ namespace Project_EF.Areas.Admin.Controllers
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
+        public string NameSort { get; set; }
+        public string DateSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+        public PaginatedList<Product> Product { get; set; }
+        public async Task<IActionResult> Index( string sortOrder,string currentFilter,string searchString,int? pageNumber){
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
-        // GET: Admin/Products
-        public async Task<IActionResult> Index()
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+
+            var pr = _context.Product.Include(p => p.Category).Include(p => p.ParentCate).Where(s => s.deleted == "False").AsNoTracking();
+
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pr = pr.Where(s => s.name_product.Contains(searchString)
+                                       || s.ParentCate.name_prcate.Contains(searchString)
+                                       || s.Category.name_cate.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "Date":
+                    pr = pr.OrderBy(s => s.date_add);
+                    break;
+                case "date_desc":
+                    pr = pr.OrderByDescending(s => s.date_add);
+                    break;
+                default:
+                    pr = pr.OrderBy(s => s.name_product);
+                    break;
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Product>.CreateAsync(pr.AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+       /* public async Task<IActionResult> Index()
         {
             var connect = _context.Product.Include(p => p.Category).Include(p => p.ParentCate).AsNoTracking();
             return View(await connect.ToListAsync());
-        }
+        }*/
 
-        // GET: Admin/Products/Details/5
+        // GET: Admin/Products/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -93,33 +136,47 @@ namespace Project_EF.Areas.Admin.Controllers
             productCreateModel.Category = new List<SelectListItem>();
             return View(productCreateModel);
         }
-        private string UploadedFile(ProductCreateModel cust)
+        public async Task<IActionResult> SaveCustomerAsync(ProductCreateModel cust)
         {
-            string fileName = null;
-
-            if (cust.Product.ImageFile != null)
+            if (ModelState.IsValid)
             {
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                fileName = Guid.NewGuid().ToString() + "-" + cust.Product.ImageFile.FileName;
-                string filePath = Path.Combine(uploadsFolder, fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                var files = HttpContext.Request.Form.Files;
+                foreach (var Image in files)
                 {
-                    cust.Product.ImageFile.CopyTo(fileStream);
+                    if (Image != null && Image.Length > 0)
+                    {
+                        var file = Image;
+                        //There is an error here
+                        var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                        if (file.Length > 0)
+                        {
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                cust.Product.image_product = fileName;
+                            }
+
+                        }
+                    }
                 }
+                _context.Add(cust.Product);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            return fileName;
-        }
-        public IActionResult SaveCustomer(ProductCreateModel cust)
-        {
-            cust.Product.image_product=UploadedFile(cust);
-            _context.Add(cust.Product);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+
+            return View();
         }
 
         // GET: Admin/Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            List<ParentCate> cate = new List<ParentCate>();
+            cate = _context.ParentCate.ToList();
+            ViewBag.nameprcate = cate;
+            List<Category> prcate = new List<Category>();
+            prcate = _context.Category.ToList();
+            ViewBag.namecate = prcate;
             if (id == null)
             {
                 return NotFound();
@@ -130,8 +187,7 @@ namespace Project_EF.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "name_cate", product.CategoryId);
-            ViewData["ParentCateId"] = new SelectList(_context.ParentCate, "Id", "name_prcate", product.ParentCateId);
+             
             return View(product);
         }
 
@@ -140,8 +196,9 @@ namespace Project_EF.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,name_product,describe,price,sale,quarantee,producer,status,date_add,image_product,ParentCateId,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, Product product)
         {
+
             if (id != product.Id)
             {
                 return NotFound();
@@ -151,6 +208,26 @@ namespace Project_EF.Areas.Admin.Controllers
             {
                 try
                 {
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var Image in files)
+                    {
+                        if (Image != null && Image.Length > 0)
+                        {
+                            var file = Image;
+                            //There is an error here
+                            var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                            if (file.Length > 0)
+                            {
+                                var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                                using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                                {
+                                    await file.CopyToAsync(fileStream);
+                                    product.image_product = fileName;
+                                }
+
+                            }
+                        }
+                    }
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -167,9 +244,7 @@ namespace Project_EF.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "name_cate", product.CategoryId);
-            ViewData["ParentCateId"] = new SelectList(_context.ParentCate, "Id", "name_prcate", product.ParentCateId);
-            return View(product);
+             return View(product);
         }
 
         // GET: Admin/Products/Delete/5
@@ -195,10 +270,11 @@ namespace Project_EF.Areas.Admin.Controllers
         // POST: Admin/Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id,Product product)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
+            var product1 = await _context.Product.FindAsync(id);
+            product1.deleted = "true";
+            _context.Product.Update(product1);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
