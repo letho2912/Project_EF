@@ -21,12 +21,13 @@ namespace Project_EF.Models
         [DisplayName("Họ và tên")]
         public string fullname { get; set; }
         [DisplayName("Email")]
-        [DataType(DataType.EmailAddress,ErrorMessage ="Địa chỉ email không hợp lệ")]
+        [Required(ErrorMessage ="Vui lòng nhập email"), DataType(DataType.EmailAddress,ErrorMessage ="Địa chỉ email không hợp lệ")]
         public string email { get; set; }
         [DisplayName("SĐT")]
-        [DataType(DataType.PhoneNumber, ErrorMessage ="Số điện thoại không hợp lệ")]
+        [Required(ErrorMessage ="Vui lòng nhập số điện thoại"), DataType(DataType.PhoneNumber, ErrorMessage ="Số điện thoại không hợp lệ")]
         public string phone { get; set; }
         [DisplayName("Nôi dung")]
+        [Required(ErrorMessage ="Vui lòng điền nội dung cần tư vấn")]
         public string content { get; set; }
         [DisplayName("Tình trạng")]
         public string status { get; set; }

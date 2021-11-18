@@ -86,6 +86,10 @@ namespace Project_EF.Controllers
                 .Where(b => b.Id == id).FirstOrDefault();
             return detail;
         }
+        public IActionResult Notices()
+        {
+            return View();
+        }
         /*Thêm sản phẩm vào giỏ hàng*/
         [Route("addcart/{productid:int}", Name = "addcart")]
         public IActionResult AddToCart([FromRoute] int productid)
@@ -94,7 +98,7 @@ namespace Project_EF.Controllers
             string user = session.GetString("userId");
             if (user == null)
             {
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Notices");
             }
             else
             {
