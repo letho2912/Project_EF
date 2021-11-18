@@ -26,8 +26,7 @@ namespace Project_EF.ViewComponents
         {
             ViewBag.displayname = HttpContext.Session.GetString("displayname");
             ViewBag.userId = HttpContext.Session.GetString("userId");
-           // HttpContext.Session.SetString("displayname", us.fullname);
-            //HttpContext.Session.SetString("userId", us.Id.ToString());
+          
             var c = _db.ParentCate.OrderBy(p => p.Id).Include(p => p.Category);
             return View("Menu",c);
         }

@@ -1,10 +1,7 @@
 ﻿@model Project_EF.Models.User
 @{
     ViewData["Title"] = "Đăng kí";
-    <link rel="stylesheet" href="~/css/register.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://use.fontawesome.com/9122787bea.js"></script>
-    Layout = "";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
 <div class="signup">
@@ -21,27 +18,33 @@
             <fieldset class="username">
                 <input type="text" asp-for="username" placeholder="Tên đăng nhập" />
                 <span asp-validation-for="username" class="text-danger"></span>
+                <span class="text-danger">@ViewBag.error</span>
             </fieldset>
             <fieldset class="email">
                 <input type="email" asp-for="email" placeholder="Địa chỉ email" />
                 <span asp-validation-for="email" class="text-danger"></span>
-
+                <span class="text-danger">@ViewBag.error1</span>
             </fieldset>
             <fieldset class="phone">
                 <input type="text" asp-for="phone" placeholder="Số điện thoại" />
                 <span asp-validation-for="phone" class="text-danger"></span>
+                <span class="text-danger">@ViewBag.error2</span>
             </fieldset>
             <fieldset class="password">
                 <input type="password" asp-for="password" placeholder="Mật khẩu" />
                 <span asp-validation-for="password" class="text-danger"></span>
-
             </fieldset>
-            <button type="submit" class="btn">Đăng kí</button>
+            <select asp-for="status" class="form-control" hidden>
+                <option selected>Enable</option>
+            </select>
+                <button type="submit" class="btn">Đăng kí</button>
         </form>
+        <span>Bạn đã có tài khoản?<a asp-action="Login">Đăng nhập</a></span>
     </div>
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

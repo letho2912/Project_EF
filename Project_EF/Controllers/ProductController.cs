@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Project_EF.Data;
 using Project_EF.Models;
 using System;
@@ -17,6 +19,38 @@ namespace Project_EF.Controllers
         {
             _db = db;
         }
+
+        public const string CARTKEY = "cart";
+
+        // Lấy cart từ Session (danh sách CartItem)
+        List<CartItem> GetCartItems()
+        {
+
+            var session = HttpContext.Session;
+            string jsoncart = session.GetString(CARTKEY);
+            if (jsoncart != null)
+            {
+                return JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
+            }
+            return new List<CartItem>();
+        }
+
+        // Xóa cart khỏi session
+        void ClearCart()
+        {
+            var session = HttpContext.Session;
+            session.Remove(CARTKEY);
+        }
+
+        // Lưu Cart (Danh sách CartItem) vào session
+        void SaveCartSession(List<CartItem> ls)
+        {
+            var session = HttpContext.Session;
+            string jsoncart = JsonConvert.SerializeObject(ls);
+            session.SetString(CARTKEY, jsoncart);
+        }
+
+
         public IActionResult ListProduct(string id)
         {
             IEnumerable<Product> b = _db.Product.Where(b => b.ParentCateId == id);
@@ -33,7 +67,7 @@ namespace Project_EF.Controllers
             var detail = getDetails(id);
             int idd = id;
             var query = _db.Product
-                .FromSqlRaw("select top 4 * from Product where ParentCateId = (select ParentCateId from Product where Id ={0})", idd)
+                .FromSqlRaw("select top 4 * from Product where deleted='False' and ParentCateId = (select ParentCateId from Product where Id ={0})", idd)
                 .ToList();
 
             ViewBag.listrelated = query;
@@ -52,6 +86,84 @@ namespace Project_EF.Controllers
                 .Where(b => b.Id == id).FirstOrDefault();
             return detail;
         }
-        
+        /*Thêm sản phẩm vào giỏ hàng*/
+        [Route("addcart/{productid:int}", Name = "addcart")]
+        public IActionResult AddToCart([FromRoute] int productid)
+        {
+            var session = HttpContext.Session;
+            string user = session.GetString("userId");
+            if (user == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                var product = _db.Product
+               .Where(p => p.Id == productid)
+               .FirstOrDefault();
+
+                var cart = GetCartItems();
+                var cartitem = cart.Find(p => p.Product.Id == productid);
+                if (cartitem != null)
+                {
+                    cartitem.quantity++;
+                }
+                else
+                {
+                    cart.Add(new CartItem() { quantity = 1, Product = product });
+                }
+
+                SaveCartSession(cart);
+            }
+            return RedirectToAction(nameof(Cart));
+        }
+        // xóa sản phẩm trong giỏ hàng
+        [Route("/removecart/{productid:int}", Name = "removecart")]
+        public IActionResult RemoveCart([FromRoute] int productid)
+        {
+            var cart = GetCartItems();
+            var cartitem = cart.Find(p => p.Product.Id == productid);
+            if (cartitem != null)
+            {
+                cart.Remove(cartitem);
+            }
+
+            SaveCartSession(cart);
+            return RedirectToAction(nameof(Cart));
+        }
+
+        // Cập nhật giỏ hàng
+        [Route("/updatecart", Name = "updatecart")]
+        [HttpPost]
+        public IActionResult UpdateCart([FromForm] int productid, [FromForm] int quantity)
+        {
+            // Cập nhật Cart thay đổi số lượng quantity ...
+            var cart = GetCartItems();
+            var cartitem = cart.Find(p => p.Product.Id == productid);
+            if (cartitem != null)
+            {
+                cartitem.quantity = quantity;
+            }
+            SaveCartSession(cart);
+            return Ok();
+        }
+
+
+        //Trang giỏ hàng
+        [Route("/cart", Name = "cart")]
+        public IActionResult Cart()
+        {
+            var session = HttpContext.Session;
+            string jsoncart = session.GetString(CARTKEY);
+            ViewBag.jsoncart = jsoncart;
+            return View(GetCartItems());
+        }
+
+        [Route("/checkout")]
+        public IActionResult CheckOut()
+        {
+            // Xử lý khi đặt hàng
+            return View();
+        }
     }
 }

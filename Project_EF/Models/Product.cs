@@ -43,6 +43,7 @@ CategoryId int,*/
         public string producer { get; set; }
         [DisplayName("Tình trạng")]
         public string status { get; set; }
+        public string deleted { get; set; }
         [DisplayName("Ngày nhập")]
         public DateTime date_add { get; set; }
         [DisplayName("Hình ảnh")]

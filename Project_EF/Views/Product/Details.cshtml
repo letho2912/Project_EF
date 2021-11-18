@@ -78,7 +78,7 @@
                         </div>
                         <div class="brand">
                             <li>
-                                @Html.DisplayNameFor(model => model.quarantee):  @Html.DisplayFor(model => model.quarantee)
+                                Danh mục:  @Html.DisplayFor(model => model.ParentCate.name_prcate)
                             </li>
                         </div>
                     </div>
@@ -111,11 +111,41 @@
                 <div class="product-main">
                     <div class="pro-wrap">
                         <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
-                        <div class="name-pro"><a asp-action="Details" asp-route-id="@related.Id">@related.name_product</a></div>
-                        <div class="price-pro">
-                            <div class="sale">@string.Format("{0:#,##0.##}", related.sale)đ</div>
-                            <div class="price">@string.Format("{0:#,##0.##}", related.price)đ</div>
+                        <div class="name-pro">@related.name_product</div>
+                        @if (related.price != related.sale)
+                        {
+                            <div class="price-pro">
+                                <div class="sale">@string.Format("{0:#,##0.##}", related.sale)đ</div>
+                                <div class="price">@string.Format("{0:#,##0.##}", related.price)đ</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="price-pro">
+                                <div class="sale">@string.Format("{0:#,##0.##}", related.sale)đ</div>
+                            </div>
+                        }
+                        @if (related.status == "Có sẵn")
+                        {
+                            <div class="btn-pro">
+                                <a asp-route="addcart"
+                                   asp-route-productid="@related.Id" class="btn-cart">Giỏ hàng</a>
+                                <a asp-action="Details" asp-route-id="@related.Id" class="btn-detail">Chi tiết</a>
+                            </div>
+                        }
+                        else @if (related.status == "Hàng order")
+                       {
+                        <div class="btn-pro">
+                            <button style="margin-right:15px" class="btn btn-danger" data-toggle="modal" data-target="#dialog1">Liên hệ</button>
+                            <a asp-action="Details" asp-route-id="@related.Id" class="btn-detail">Chi tiết</a>
                         </div>
+                    }
+                    else @if (related.status == "Hết hàng")
+                           {
+                            <div class="btn-pro">
+                                <button class="btn" disabled>Hết hàng</button>
+                            </div>
+                        }
                     </div>
                 </div>
             }
