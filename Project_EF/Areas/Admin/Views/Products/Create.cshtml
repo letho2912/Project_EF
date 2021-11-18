@@ -4,15 +4,12 @@
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>Products</h4>
+<h4>Thêm mới sản phẩm</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="SaveCustomer" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="SaveCustomer" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="@Model.Product.name_product" class="control-label"></label>
                 <input asp-for="@Model.Product.name_product" class="form-control" />
@@ -22,6 +19,10 @@
                 @Html.LabelFor(model => model.Product.describe, htmlAttributes: new { @class = "control-label" })
                 @Html.TextAreaFor(model => model.Product.describe, new { htmlAttributes = new { @class = "form-control" } })
             </div>
+            
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="@Model.Product.price" class="control-label"></label>
                 <input asp-for="@Model.Product.price" class="form-control" />
@@ -58,7 +59,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Product.material" class="control-label"></label>
-                <input asp-for="@Model.Product.material" type="file" class="form-control" />
+                <input asp-for="@Model.Product.material" type="text" class="form-control" />
                 <span asp-validation-for="@Model.Product.material" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -73,15 +74,19 @@
                     <option value="">Select City</option>
                 </select>
             </div>
+            <select hidden asp-for="@Model.Product.deleted">
+                <option selected>False</option>
+            </select>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     </div>
-</div>
+
+</form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Trở về</a>
 </div>
 
 @section Script{
@@ -90,7 +95,7 @@
 }
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function ()
     {
         $('#lstCountry').change(function () {
@@ -119,5 +124,5 @@
             }
         });
     })
-</script>
+    </script>
 }

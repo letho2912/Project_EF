@@ -168,7 +168,6 @@ F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Project_EF.dll
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\ref\Project_EF.dll
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Project_EF.pdb
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Project_EF.genruntimeconfig.cache
-F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Project_EF.csproj.AssemblyReference.cache
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Product\cart.cshtml.g.cs
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Shared\_CartPartial.cshtml.g.cs
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Shared\_LayoutLogin.cshtml.g.cs
@@ -176,3 +175,4 @@ F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Home\Introducer.c
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Home\Contact.cshtml.g.cs
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Home\Notice.cshtml.g.cs
 F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Razor\Views\Product\Notices.cshtml.g.cs
+F:\Dự án\Project_EF\Project_EF\obj\Debug\net5.0\Project_EF.csproj.AssemblyReference.cache

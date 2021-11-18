@@ -5,90 +5,124 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="@Model.name_product" class="control-label"></label>
+                <input asp-for="@Model.name_product" class="form-control" />
+                <span asp-validation-for="@Model.name_product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.describe, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.describe, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
 
-<h4>Product</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
             <div class="form-group">
-                <label asp-for="name_product" class="control-label"></label>
-                <input asp-for="name_product" class="form-control" />
-                <span asp-validation-for="name_product" class="text-danger"></span>
+                <label asp-for="@Model.price" class="control-label"></label>
+                <input asp-for="@Model.price" class="form-control" />
+                <span asp-validation-for="@Model.price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="describe" class="control-label"></label>
-                <input asp-for="describe" class="form-control" />
-                <span asp-validation-for="describe" class="text-danger"></span>
+                <label asp-for="@Model.sale" class="control-label"></label>
+                <input asp-for="@Model.sale" class="form-control" />
+                <span asp-validation-for="@Model.sale" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="price" class="control-label"></label>
-                <input asp-for="price" class="form-control" />
-                <span asp-validation-for="price" class="text-danger"></span>
+                <label asp-for="@Model.quarantee" class="control-label"></label>
+                <input asp-for="@Model.quarantee" class="form-control" />
+                <span asp-validation-for="@Model.quarantee" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="sale" class="control-label"></label>
-                <input asp-for="sale" class="form-control" />
-                <span asp-validation-for="sale" class="text-danger"></span>
+                <label asp-for="@Model.producer" class="control-label"></label>
+                <input asp-for="@Model.producer" class="form-control" />
+                <span asp-validation-for="@Model.producer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="quarantee" class="control-label"></label>
-                <input asp-for="quarantee" class="form-control" />
-                <span asp-validation-for="quarantee" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="material" class="control-label"></label>
-                <input asp-for="material" class="form-control" />
-                <span asp-validation-for="quarantee" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="producer" class="control-label"></label>
-                <input asp-for="producer" class="form-control" />
-                <span asp-validation-for="producer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="status" class="control-label"></label>
-                <select asp-for="status" class="form-control">
-                    <option selected>Hàng mới</option>
+                <label asp-for="@Model.status" class="control-label"></label>
+                <select asp-for="@Model.status" class="form-control">
+                    <option selected>Có sẵn</option>
                     <option>Hàng order</option>
                     <option>Hết hàng</option>
                 </select>
-                <span asp-validation-for="status" class="text-danger"></span>
+                <span asp-validation-for="@Model.status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="date_add" class="control-label"></label>
-                <input asp-for="date_add" class="form-control" />
-                <span asp-validation-for="date_add" class="text-danger"></span>
+                <label asp-for="@Model.image_product" class="control-label"></label>
+                <input asp-for="@Model.image_product" class="form-control" hidden />
+                <input asp-for="@Model.image_product" type="file" class="form-control" />
+                <span asp-validation-for="@Model.image_product" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="image_product" class="control-label"></label>
-                <input asp-for="image_product" class="form-control" />
-                <span asp-validation-for="image_product" class="text-danger"></span>
+                <label asp-for="@Model.material" class="control-label"></label>
+                <input asp-for="@Model.material" type="text" class="form-control" />
+                <span asp-validation-for="@Model.material" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParentCateId" class="control-label"></label>
-                <select asp-for="ParentCateId" class="form-control" asp-items="ViewBag.ParentCateId"></select>
-                <span asp-validation-for="ParentCateId" class="text-danger"></span>
+                <label asp-for="@Model.ParentCateId" class="control-label"></label>
+                <select id="lstCountry" asp-for="@Model.ParentCateId" class="form-control" asp-items="@(new SelectList(ViewBag.nameprcate,"Id","name_prcate"))">
+                    <option value="">Select Country</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <label asp-for="@Model.CategoryId" class="control-label"></label>
+                <select id="lstCity" asp-for="@Model.CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.namecate,"Id","name_cate"))">
+                    <option value="">Select City</option>
+                </select>
             </div>
+            <select hidden asp-for="@Model.deleted">
+                <option selected>False</option>
+            </select>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     </div>
-</div>
+
+</form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Trở về</a>
 </div>
 
+@section Script{
+    <script>CKEDITOR.replace("describe")</script>
+
+}
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $('#lstCountry').change(function () {
+            var selectedCountry = $("#lstCountry").val();
+
+            var citySelect = $('#lstCity');
+            citySelect.empty();
+
+            if (selectedCountry != null &&
+                selectedCountry != '') {
+                $.getJSON('@Url.Action("GetCities")', { ParentCateId: selectedCountry }, function (cities) {
+                    if (cities != null && !jQuery.isEmptyObject(cities)) {
+                        citySelect.append($('<option/>', {
+                            value: null,
+                            text: "Select City"
+                        }));
+
+                        $.each(cities, function (index, city) {
+                            citySelect.append($('<option/>', {
+                                value: city.value,
+                                text: city.text
+                            }));
+                        });
+                    };
+                });
+            }
+        });
+    })
+    </script>
 }

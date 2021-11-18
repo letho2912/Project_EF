@@ -87,8 +87,9 @@ li.list-unstyled i, li.has-sub i {
 .main-content .container{
     padding:10px;
 }
-.container table{
-    width:100% !important;
+.container table {
+    width: 100% !important;
+    font-size: 13px;
 }
 a.dropbtn {
     color: #333;
