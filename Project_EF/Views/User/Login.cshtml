@@ -2,16 +2,14 @@
 @{
     ViewData["Title"] = "Đăng nhập";
     <link rel="stylesheet" href="~/css/register.css" />
-    Layout = "";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<div class="signup">
-    <div class="signup-connect">
-        <img src="https://xaynhasaigon.vn/wp-content/uploads/2017/09/noi-that-nha-hien-dai-6.jpg" alt="">
-    </div>
-    <div class="signup-classic">
+<div class="signup" style="width:400px">
+    <div class="signup-classic" style="width:100%">
         <form class="form" asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <span class="text-danger">@ViewBag.error</span>
             <fieldset class="username">
                 <input type="text" asp-for="username" placeholder="Tên đăng nhập" />
                 <span asp-validation-for="username" class="text-danger"></span>
@@ -20,8 +18,9 @@
                 <input type="password" asp-for="password" placeholder="Mật khẩu" />
                 <span asp-validation-for="password" class="text-danger"></span>
             </fieldset>
-            <button type="submit" class="btn">Đăng kí</button>
+            <button type="submit" class="btn">Đăng nhập</button>
         </form>
+        <span>Bạn chưa có tài khoản? <a asp-action="Register">Đăng kí</a></span>
     </div>
 </div>
 

@@ -19,9 +19,11 @@ namespace Project_EF.Models
         [Key]
         [DisplayName("ID")]
         public int Id { get; set; }
+        [Required(ErrorMessage ="Vui lòng nhập họ tên")]
         [DisplayName("Họ tên")]
         public string fullname { get; set; }
         [DisplayName("Tên đăng nhập")]
+        [Required(ErrorMessage = "Tên đăng nhập không được trống")]
         public string username { get; set; }
         [DisplayName("Email")]
         [MaxLength(100)]
@@ -31,6 +33,7 @@ namespace Project_EF.Models
         [DataType(DataType.PhoneNumber, ErrorMessage="Số điện thoại không hợp lệ")]
         public string phone { get; set; }
         [DisplayName("Mật khẩu")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         public string password { get; set; }
         [DisplayName("Tình trạng")]
         public string status { get; set; }

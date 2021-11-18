@@ -82,7 +82,7 @@ nav {
         padding-left: 100px;
     }
     nav > ul > li.displayname-account {
-        padding-left: 80px;
+        padding-left: 60px;
     }
     nav > ul li a {
         display: block;
@@ -499,3 +499,38 @@ a.act {
 .detailsRelated {
     border: 1px solid rgb(233, 228, 228);
 }
+.btn-pro {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+    .btn-pro a.btn-cart {
+        margin-right: 20px;
+        background: rgb(46, 27, 219);
+        border-radius: 5px;
+        padding: 5px 10px 5px 10px;
+        color: #fff;
+        border: 1px solid rgb(46, 27, 219);
+        text-decoration:none;
+    }
+
+        .btn-pro .btn-cart:hover {
+            background: rgb(64, 45, 240);
+            border: 1px solid rgb(64, 45, 240);
+        }
+
+    .btn-pro a.btn-detail {
+        background: rgb(14, 168, 34);
+        border-radius: 5px;
+        padding: 5px 10px 5px 10px;
+        color: #fff;
+        border: 1px solid rgb(14, 168, 34);
+        text-decoration:none;
+    }
+
+        .btn-pro .btn-detail:hover {
+            background: rgb(9, 201, 35);
+            border: 1px solid rgb(9, 201, 35);
+        }
+

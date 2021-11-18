@@ -1,4 +1,99 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<Project_EF.Models.Product>
 
+<div class="product-home">
+    <div class="pagewrap">
+        <h3 class="h3-title"><span>Sản phẩm mới nhất</span></h3>
+        @foreach (var product in Model)
+        {
+            <div class="product-main">
+                <div class="pro-wrap">
+                    <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
+                    <div class="name-pro">@product.name_product</div>
+                    @if (product.price != product.sale)
+                    {
+                        <div class="price-pro">
+                            <div class="sale">@string.Format("{0:#,##0.##}", product.sale)đ</div>
+                            <div class="price">@string.Format("{0:#,##0.##}", product.price)đ</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="price-pro">
+                            <div class="sale">@string.Format("{0:#,##0.##}", product.sale)đ</div>
+                        </div>
+                    }
+                    @if (product.status == "Có sẵn")
+                    {
+                        <div class="btn-pro">
+                            <a asp-route="addcart"
+                               asp-route-productid="@product.Id" class="btn-cart">Giỏ hàng</a>
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn-detail">Chi tiết</a>
+                        </div>
+                    }
+                    else @if (product.status == "Hàng order")
+               {
+                <div class="btn-pro">
+                    <button style="margin-right:15px" class="btn btn-danger" data-toggle="modal" data-target="#dialog1">Liên hệ</button>
+                    <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn-detail">Chi tiết</a>
+                </div>
+            }
+            else @if (product.status == "Hết hàng")
+                   {
+                    <div class="btn-pro">
+                        <button class="btn" disabled>Hết hàng</button>
+                    </div>
+                }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="product-home">
+    <div class="pagewrap">
+        <h3 class="h3-title"><span>Sản phẩm khuyễn mãi</span></h3>
+        @foreach (var product in ViewBag.saleProduct)
+        {
+            <div class="product-main">
+                <div class="pro-wrap">
+                    <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
+                    <div class="name-pro">@product.name_product</div>
+                    @if (product.price != product.sale)
+                    {
+                        <div class="price-pro">
+                            <div class="sale">@string.Format("{0:#,##0.##}", product.sale)đ</div>
+                            <div class="price">@string.Format("{0:#,##0.##}", product.price)đ</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="price-pro">
+                            <div class="sale">@string.Format("{0:#,##0.##}", product.sale)đ</div>
+                        </div>
+                    }
+                    @if (product.status == "Có sẵn")
+                    {
+                        <div class="btn-pro">
+                            <a asp-route="addcart"
+                               asp-route-productid="@product.Id" class="btn-cart">Giỏ hàng</a>
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn-detail">Chi tiết</a>
+                        </div>
+                    }
+                    else @if (product.status == "Hàng order")
+               {
+                <div class="btn-pro">
+                    <button style="margin-right:15px" class="btn btn-danger" data-toggle="modal" data-target="#dialog1">Liên hệ</button>
+                    <a asp-action="Details" asp-controller="Product" asp-route-id="@product.Id" class="btn-detail">Chi tiết</a>
+                </div>
+            }
+            else @if (product.status == "Hết hàng")
+                   {
+                    <div class="btn-pro">
+                        <button class="btn" disabled>Hết hàng</button>
+                    </div>
+                }
+                </div>
+            </div>
+        }
+    </div>
+</div>
