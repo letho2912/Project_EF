@@ -39,5 +39,23 @@ namespace Project_EF.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult Introducer()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(Contact contact)
+        {
+                _db.Add(contact);
+                _db.SaveChanges();
+                ViewBag.notice = "Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất, xin cảm ơn!";
+
+            return View("Notice");           
+        }
     }
 }
