@@ -1,0 +1,29 @@
+﻿@model Project_EF.Models.Admins
+@{
+    ViewData["Title"] = "Đăng nhập";
+    <link rel="stylesheet" href="~/css/register.css" />
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="signup" style="width:400px">
+    <div class="signup-classic" style="width:100%">
+        <form class="form" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <span class="text-danger">@ViewBag.error</span>
+            <fieldset class="username">
+                <input type="text" asp-for="username" placeholder="Tên đăng nhập" />
+                <span asp-validation-for="username" class="text-danger"></span>
+            </fieldset>
+            <fieldset class="password">
+                <input type="password" asp-for="password" placeholder="Mật khẩu" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </fieldset>
+            <button type="submit" class="btn">Đăng nhập</button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

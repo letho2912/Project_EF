@@ -18,6 +18,7 @@ namespace Project_EF.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Contact> Contact { get; set; }
+        public DbSet<Project_EF.Models.Admins> Admins { get; set; }
 
     }
 }
