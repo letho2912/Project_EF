@@ -32,6 +32,9 @@ namespace Project_EF.Areas.Admin.Controllers
         public string CurrentSort { get; set; }
         public PaginatedList<Product> Product { get; set; }
         public async Task<IActionResult> Index( string sortOrder,string currentFilter,string searchString,int? pageNumber){
+            ViewBag.displayname = HttpContext.Session.GetString("displayname");
+            ViewBag.userId = HttpContext.Session.GetString("userId");
+            ViewBag.email = HttpContext.Session.GetString("email");
             ViewData["CurrentSort"] = sortOrder;
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
@@ -70,11 +73,6 @@ namespace Project_EF.Areas.Admin.Controllers
             int pageSize = 5;
             return View(await PaginatedList<Product>.CreateAsync(pr.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-       /* public async Task<IActionResult> Index()
-        {
-            var connect = _context.Product.Include(p => p.Category).Include(p => p.ParentCate).AsNoTracking();
-            return View(await connect.ToListAsync());
-        }*/
 
         // GET: Admin/Products/Details/
         public async Task<IActionResult> Details(int? id)

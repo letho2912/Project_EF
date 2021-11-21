@@ -112,19 +112,19 @@
             <div class="pagewrap-right">
                 <div class="header-right">
                     <div class="dropdown-account">
-                        <a onclick="myFunction()" class="dropbtn">Nguyễn Thị Lệ Thơ</a>
+                        <a onclick="myFunction()" class="dropbtn">@ViewBag.displayname</a>
                         <div id="myDropdown" class="dropdown-content">
                             <div class="top-account">
                                 <div class="avt-account">
                                     <img src="Image/tải xuống.png" alt="anh">
                                 </div>
                                 <div class="inf-account">
-                                    <div class="displayname">Nguyễn Thị Lệ Thơ</div>
-                                    <div class="email-account">letho.lvt@gmail.com</div>
+                                    <div class="displayname">@ViewBag.displayname</div>
+                                    <div class="email-account">@ViewBag.email</div>
                                 </div>
                             </div>
                             <div class="footer-account">
-                                <a asp-area="" asp-controller="Product" asp-action="ListProduct">
+                                <a asp-area="Admin" asp-controller="AdminManage" asp-action="Logout">
                                     <i class="zmdi zmdi-power"></i>Đăng xuất
                                 </a>
                             </div>
