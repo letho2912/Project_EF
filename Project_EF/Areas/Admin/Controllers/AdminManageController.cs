@@ -39,7 +39,8 @@ namespace Project_EF.Areas.Admin.Controllers
                 /*HttpContext.Session.SetString("displayname", us.displayname);
                 HttpContext.Session.SetString("email", us.email);
                 HttpContext.Session.SetString("adminId", us.Id.ToString());*/
-                return RedirectToAction("Index", "Products");
+
+                return RedirectToAction("Dashboard", "Dashboard");
             }
             else
             {
@@ -47,60 +48,40 @@ namespace Project_EF.Areas.Admin.Controllers
                 return View();
             }
         }
-        // GET: Admin/AdminManage/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult User_Role()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var admins = await _context.Admins.FindAsync(id);
-            if (admins == null)
-            {
-                return NotFound();
-            }
-            return View(admins);
+            IEnumerable<Admins> objList = _context.Admins;
+            return View(objList);
         }
-        public IActionResult Logout()
+        /*Thêm nhân viên*/
+        public IActionResult CreateUser()
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Login", "AdminManage");
+            Admins login = new Admins();
+            return PartialView("_AddUser", login);
         }
-        // POST: Admin/AdminManage/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,username,displayname,password,level,status")] Admins admins)
+        public IActionResult CreateUser(Admins obj)
         {
-            if (id != admins.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(admins);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdminsExists(admins.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(admins);
+            _context.Admins.Add(obj);
+            _context.SaveChanges();
+            return RedirectToAction("User_role");
         }
+        // GET: Admin/Products/Delete/5
+        public IActionResult Edit(int? id)
+        {
+            var b = _context.Admins.Find(id);
+            return PartialView("_UpdateCate", b);
+        }
+
+        // POST: Admin/Products/Delete/5
+        [HttpPost]
+        public IActionResult Edit(Admins obj)
+        {
+            _context.Admins.Update(obj);
+            _context.SaveChanges();
+            return PartialView("_UpdateCate", obj);
+    }
+
         private bool AdminsExists(int id)
         {
             return _context.Admins.Any(e => e.Id == id);

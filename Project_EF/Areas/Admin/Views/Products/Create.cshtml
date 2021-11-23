@@ -19,9 +19,8 @@
                 @Html.LabelFor(model => model.Product.describe, htmlAttributes: new { @class = "control-label" })
                 @Html.TextAreaFor(model => model.Product.describe, new { htmlAttributes = new { @class = "form-control" } })
             </div>
-            
+
         </div>
-        <div class="col-md-1"></div>
         <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="@Model.Product.price" class="control-label"></label>
@@ -78,17 +77,21 @@
                 <option selected>False</option>
             </select>
             <br />
-            <div class="form-group">
+
+            <div class="col-md-1"></div>
+        </div>
+        <div class="form-group">
+            <div style="float:left">
+                <a asp-action="Index" class="btn btn-danger">Trở về</a>
+            </div>
+            <div style="float:right">
                 <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </div>
-    </div>
-
 </form>
 
-<div>
-    <a asp-action="Index">Trở về</a>
-</div>
+
+   
 
 @section Script{
     <script>CKEDITOR.replace("Product_describe")</script>

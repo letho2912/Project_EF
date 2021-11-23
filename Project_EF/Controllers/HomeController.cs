@@ -24,7 +24,7 @@ namespace Project_EF.Controllers
 
         public IActionResult Index()
         {
-            List<Product> product = _db.Product.OrderBy(b=>b.date_add).Where(b=>b.deleted == "False").Take(4).ToList();
+            List<Product> product = _db.Product.OrderByDescending(b=>b.date_add).Where(b=>b.deleted == "False").Take(4).ToList();
             var saleProduct = _db.Product.Where(c => c.price > c.sale && c.deleted=="False").Take(4).ToList();
             /*var query = _db.Product.Include(p=>p.OrderDetail)
                 .FromSqlRaw("SELECT TOP 3 WITH TIES name_product, sum(amount) " +
@@ -63,6 +63,14 @@ namespace Project_EF.Controllers
                 ViewBag.notice = "Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất, xin cảm ơn!";
 
             return View("Notice");           
+        }
+        public IActionResult Search(string tukhoa)
+        {
+            if (tukhoa == null)
+                tukhoa = "";
+            Product[] pr = _db.Product.Where(b => b.name_product.ToLower().Contains(tukhoa.ToLower())).ToArray();
+            return View("Search", pr);
+            ViewBag.tukhoa = tukhoa;
         }
     }
 }

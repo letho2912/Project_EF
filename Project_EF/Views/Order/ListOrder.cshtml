@@ -31,16 +31,23 @@
         </td>
         @if (item.status == "Đang xử lý")
         {
-    <td>
-        @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId })
-        @Html.ActionLink("Hủy", "Huy", new { orderId = item.OrderId })
-    </td>
+            <td>
+                @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId }, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Hủy", "Huy", new { orderId = item.OrderId }, new { @class = "btn btn-danger" })
+            </td>
+        }
+        else if (item.status == "Xác nhận...")
+        {
+            <td>
+                @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId }, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Xác nhận", "Xacnhan", new { orderId = item.OrderId }, new { @class = "btn btn-info" })
+            </td>
         }
         else
         {
-    <td>
-        @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId })
-    </td>
+            <td>
+                @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId }, new { @class = "btn btn-outline-info" })
+            </td>
         }
     </tr>
         }

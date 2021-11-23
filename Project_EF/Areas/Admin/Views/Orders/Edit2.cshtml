@@ -1,0 +1,11 @@
+﻿@model Project_EF.Models.Order
+    <center>
+        <h4>Đơn hàng đã được giao</h4>
+        <form asp-action="Edit2">
+            <input type="hidden" asp-for="OrderId" />
+            <div>
+                <input type="submit" value="Có" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-danger">Trở về</a>
+            </div>
+        </form>
+    </center>

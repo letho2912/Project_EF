@@ -57,5 +57,20 @@ namespace Project_EF.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(ListOrder));
         }
+        [HttpGet]
+        public IActionResult Xacnhan(int? orderId)
+        {
+
+            var order = _context.Order.Find(orderId);
+            return View(order);
+        }
+        public async Task<IActionResult> Xacnhan(int? orderId, Order order)
+        {
+            var order1 = await _context.Order.Where(b => b.OrderId == orderId).FirstOrDefaultAsync();
+            order1.status = "Hoàn thành";
+            _context.Order.Update(order1);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ListOrder));
+        }
     }
 }

@@ -1,0 +1,14 @@
+﻿@model Project_EF.Models.Order
+
+<h3>Bạn đã nhận được hàng?</h3>
+<form asp-action="Xacnhan">
+    <input type="hidden" asp-for="OrderId" />
+    <input type="submit" value="Đồng ý" class="btn btn-danger" />
+    <a class="btn btn-danger" asp-action="ListOrder">Trở về</a>
+</form>
+
+<p class="alert alert-danger">Cảm ơn sự ủng hộ của quý khách</p>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

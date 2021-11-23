@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Project_EF.Models.ParentCate>
 
-<ul>
+<ul style="margin-bottom:0px">
     <li><a asp-action="Index" asp-controller="Home" title="Trang chủ" class="active">Trang chủ</a></li>
     <li><a asp-controller="Home" asp-action="Introducer" title="Giới thiệu">Giới thiệu</a></li>
     <li>
@@ -35,8 +35,8 @@
     </li>
     <li><a asp-action="Contact" asp-controller="Home" title="Liên hệ">Liên hệ</a></li>
     <div class="box">
-        <form class="sbox" action="/search" method="get">
-            <input class="stext" type="text" name="q" placeholder="Tìm kiếm...">
+        <form class="sbox" asp-controller="Home" asp-action="Search" method="get">
+            <input class="stext" type="text" name="tukhoa" placeholder="Tìm kiếm...">
             <a class="sbutton" type="submit" href="javascript:void(0);">
                 <i class="fa fa-search"></i>
             </a>

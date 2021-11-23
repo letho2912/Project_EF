@@ -24,11 +24,11 @@
     <div class="page">
         <div class="page-wrapper">
             <div class="pagewrap-left">
-                <div class="header-top">hahahahah</div>
+                <div class="header-top"></div>
                 <div class="menu-left">
                     <ul class="nav-menu">
                         <li class="list-unstyled">
-                            <a asp-controller="Home" asp-action="Index">
+                            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Dashboard">
                                 <i class="fa fa-home" aria-hidden="true"></i>Bảng điều khiển
                             </a>
                         </li>
@@ -58,13 +58,13 @@
                             <p>Quản lý đơn hàng</p>
                             <ul>
                                 <li>
-                                    <a asp-area="" asp-controller="Login" asp-action="User_role">
+                                    <a asp-area="Admin" asp-controller="Orders" asp-action="Index">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Danh sách đơn
                                         hàng
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Login" asp-action="User_role">
+                                    <a asp-area="" asp-controller="Orders" asp-action="Index">
                                         <i class="fa fa-truck"
                                            aria-hidden="true"></i>Thông tin vận chuyển
                                     </a>
@@ -81,7 +81,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Login" asp-action="User_role">
+                                    <a asp-area="Admin" asp-controller="AdminManage" asp-action="User_role">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Phân quyền
                                     </a>
                                 </li>
@@ -91,7 +91,7 @@
                             <p>Quản lý liên hệ</p>
                             <ul>
                                 <li>
-                                    <a asp-controller="Contact" asp-action="ManagerContact">
+                                    <a asp-area="Admin" asp-controller="Contacts" asp-action="Index">
                                         <i class="fa fa-envelope"
                                            aria-hidden="true"></i> Danh sách liên hệ
                                     </a>
@@ -137,8 +137,8 @@
                                     </a>
                                 </div>
                             </div>
-                            }
-                        </div>
+                        }
+                    </div>
                 </div>
                 <div class="main-content">
                     <div class="container">
@@ -166,6 +166,9 @@
         }
     </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script src="~/ckeditor/ckeditor.js"></script>

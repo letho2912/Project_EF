@@ -17,6 +17,7 @@ a {
 
 .pagewrap-left {
     width: 18%;
+    background:#333;
     padding: 0;
 }
 
@@ -196,3 +197,280 @@ a.dropbtn {
         font-size: 14px;
         color: #fff !important;
     }
+
+    /*Trang Dashboard*/
+.title {
+    border-bottom: 1px solid #e1e1e1;
+    /*margin: 0 0px 2px 0;*/
+    margin-left: 15px;
+    line-height: 42px;
+    margin-top: auto;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.khungdan {
+    width: 95%;
+    height: auto;
+    display: flex;
+    margin-left: 20px;
+}
+
+.khung1 {
+    width: 220px;
+    /*padding: 10px;*/
+    position: relative;
+    border-radius: 5px 5px;
+    border-bottom: #3366CC;
+    height: auto;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.tren {
+    background-color: #3366CC;
+    color: white;
+    display: flex;
+}
+
+.icon {
+    font-size: 40px;
+    margin: 15px 10px 5px;
+    width: 30%;
+}
+
+.socmt {
+    width: 70%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.sotren {
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.cmt {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.duoi {
+    background-color: #EEEEEE;
+    border: 1px solid #3366CC;
+    height: 30px;
+}
+
+.xemCT a {
+    color: #3366CC;
+    font-size: 12px;
+    align-content: center;
+}
+
+.iconD {
+    color: #3366CC;
+    float: right;
+}
+
+.chu {
+    margin-top: 6px;
+}
+/*khung2*/
+.khung2 {
+    width: 220px;
+    /*padding: 10px;*/
+    position: relative;
+    border-radius: 5px;
+    border-bottom: #00BB00;
+    height: auto;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.tren2 {
+    background-color: #00BB00;
+    color: white;
+    display: flex;
+}
+
+.icon2 {
+    font-size: 38px;
+    margin: 15px 10px 5px;
+    width: 30%;
+}
+
+.socmt2 {
+    width: 70%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.sotren2 {
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.cmt2 {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.duoi2 {
+    background-color: #EEEEEE;
+    border: 1px solid #00BB00;
+    height: 30px;
+}
+
+.xemCT2 a {
+    color: #00BB00;
+    font-size: 12px;
+    align-content: center;
+}
+
+.iconD2 {
+    color: #00BB00;
+    float: right;
+}
+
+.chu2 {
+    margin-top: 6px;
+}
+/*khung3*/
+.khung3 {
+    width: 220px;
+    /*padding: 10px;*/
+    position: relative;
+    border-radius: 5px;
+    border-bottom: #00BB00;
+    height: auto;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.tren3 {
+    background-color: #FF9900;
+    color: white;
+    display: flex;
+}
+
+.icon3 {
+    font-size: 38px;
+    margin: 15px 10px 5px;
+    width: 30%;
+}
+
+.socmt3 {
+    width: 70%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.sotren3 {
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.cmt3 {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.duoi3 {
+    background-color: #EEEEEE;
+    border: 1px solid #FF9900;
+    height: 30px;
+}
+
+.xemCT3 a {
+    color: #FF9900;
+    font-size: 12px;
+    align-content: center;
+    text-decoration: none;
+}
+
+.iconD3 {
+    color: #FF9900;
+    float: right;
+}
+
+.chu3 {
+    margin-top: 6px;
+}
+/*khung4*/
+.khung4 {
+    width: 220px;
+    /*padding: 10px;*/
+    position: relative;
+    border-radius: 5px;
+    border-bottom: #00BB00;
+    height: auto;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.tren4 {
+    background-color: #FF3300;
+    color: white;
+    display: flex;
+}
+
+.icon4 {
+    font-size: 38px;
+    margin: 15px 10px 5px;
+    width: 30%;
+}
+
+.socmt4 {
+    width: 70%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.sotren4 {
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.cmt4 {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.duoi4 {
+    background-color: #EEEEEE;
+    border: 1px solid #FF9900;
+    height: 30px;
+}
+
+.xemCT4 a {
+    color: #FF3300;
+    font-size: 12px;
+    align-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.iconD4 {
+    color: #FF3300;
+    float: right;
+}
+
+.chu4 {
+    margin-top: 6px;
+}

@@ -1,0 +1,24 @@
+﻿@model Project_EF.Models.Admins
+
+<div class="modal fade" id="updateCate">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCateTitle">Bạn có chắc muốn vô hiệu tài khoản @Model.username này?</h5>
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+                <form action="Edit">
+                    <input type="hidden" asp-for="Id" />
+                    <select asp-for="status" class="form-control">
+                        <option selected>Disable</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-save="sv-model">Xóa</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,12 @@ namespace Project_EF.Areas.Admin.Controllers
     public class ParentCatesController : Controller
     {
         private readonly Connect _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         public ParentCate ParentCate { get; set; }
 
-        public ParentCatesController(Connect context)
+        public ParentCatesController(Connect context,IWebHostEnvironment webHostEnvironment)
         {
+            _webHostEnvironment = webHostEnvironment;
             _context = context;
         }
 
@@ -62,6 +66,26 @@ namespace Project_EF.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                foreach (var Image in files)
+                {
+                    if (Image != null && Image.Length > 0)
+                    {
+                        var file = Image;
+                        //There is an error here
+                        var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                        if (file.Length > 0)
+                        {
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                parentCate.image_prcate = fileName;
+                            }
+
+                        }
+                    }
+                }
                 _context.Add(parentCate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -101,6 +125,26 @@ namespace Project_EF.Areas.Admin.Controllers
             {
                 try
                 {
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var Image in files)
+                    {
+                        if (Image != null && Image.Length > 0)
+                        {
+                            var file = Image;
+                            //There is an error here
+                            var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                            if (file.Length > 0)
+                            {
+                                var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                                using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                                {
+                                    await file.CopyToAsync(fileStream);
+                                    parentCate.image_prcate = fileName;
+                                }
+
+                            }
+                        }
+                    }
                     _context.Update(parentCate);
                     await _context.SaveChangesAsync();
                 }

@@ -9,15 +9,39 @@
     <div class="form-actions no-color">
         <p>
             Từ khóa: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Tìm kiếm" class="btn btn-default" /> |
+            <input type="submit" value="Tìm kiếm" class="btn btn-default" /> 
             <a asp-action="Index">Danh sách đầy đủ</a>
         </p>
     </div>
 </form>
 
-<p>
-    <a asp-action="Create">Thêm mới</a>
-</p>
+<div>
+    <a asp-action="Create" class="btn btn-success">Thêm mới</a>
+    <div style="float:right">
+        Trang @(Model.TotalPages < Model.PageIndex ? 0 : Model.PageIndex) / @Model.TotalPages
+        <br />
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary @prevDisabled">
+            Trước
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary @nextDisabled">
+            Sau
+        </a>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -27,9 +51,7 @@
             <th>
                 Tên SP
             </th>
-            <th>
-                Mô tả
-            </th>
+            
             <th>
                 Giá gốc
             </th>
@@ -48,7 +70,7 @@
             <th>
                 Tình trạng
             </th>
-            <th>
+            <th style="width:35px">
                 <a style="color:#333" asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Ngày nhập</a>
             </th>
             <th>
@@ -57,7 +79,7 @@
             <th>
                 Danh mục con
             </th>
-            <th></th>
+            <th style="width:160px;"></th>
         </tr>
     </thead>
     <tbody>
@@ -70,9 +92,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.name_product)
                 </td>
-                <td>
-                    @Html.Raw(item.describe.Substring(0, 50))
-                </td>
+               
                 <td>
                     @string.Format("{0:#,##0.##}", item.price)đ
                 </td>
@@ -101,35 +121,12 @@
                     @Html.DisplayFor(modelItem => item.Category.name_cate)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                    <a style="font-size: 14px" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Chỉnh sửa</a>
+                    <a style="font-size: 14px" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning">Xóa</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<div style="float:right">
-    Trang @(Model.TotalPages < Model.PageIndex ? 0 : Model.PageIndex) / @Model.TotalPages
-    <br />
 
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-    }
-
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-pageNumber="@(Model.PageIndex - 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-primary @prevDisabled">
-        Trước
-    </a>
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-pageNumber="@(Model.PageIndex + 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-primary @nextDisabled">
-        Sau
-    </a>
-</div>
 

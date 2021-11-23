@@ -1,0 +1,234 @@
+﻿@model Project_EF.ViewModel.ProductCreateModel
+@{
+    ViewData["Title"] = "Trang quản lí";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="title">Điều khiển</div>
+<div class="khungdan">
+    <div class="khung4">
+        <div class="tren4">
+            <span class="icon4">
+                <i class="fa fa-money"
+                   aria-hidden="true"></i>
+            </span>
+            <div class="socmt4">
+                <span class="sotren4">@ViewBag.totalDT.ToString("n0")</span>
+                <p class="cmt4">Doanh thu</p>
+            </div>
+        </div>
+        <div class="duoi4">
+            <div class="chu4">
+                <span class="xemCT4"><a href="">Xem chi tiết</span><span class="iconD4">
+                    <i class="fa fa-arrow-circle-right"
+                       aria-hidden="true"></i></a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="khung1">
+        <div class="tren">
+            <span class="icon">
+                <i class="fa fa-comments"
+                   aria-hidden="true"></i>
+            </span>
+            <div class="socmt">
+                <span class="sotren">@ViewBag.usernew </span>
+                <p class="cmt">Khách hàng mới</p>
+            </div>
+        </div>
+        <div class="duoi">
+            <div class="chu">
+                <span class="xemCT"><a href="">Xem chi tiết</span><span class="iconD">
+                    <i class="fa fa-arrow-circle-right"
+                       aria-hidden="true"></i> </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="khung2">
+        <div class="tren2">
+            <span class="icon2">
+                <i class="fa fa-envelope"
+                   aria-hidden="true"></i>
+            </span>
+            <div class="socmt2">
+                <span class="sotren2">@ViewBag.contact</span>
+                <p class="cmt2">Tư vấn mới</p>
+            </div>
+        </div>
+        <div class="duoi2">
+            <div class="chu2">
+                <span class="xemCT2"><a href="tuvanAdmin">Xem chi tiết</span><span class="iconD2">
+                    <i class="fa fa-arrow-circle-right"
+                       aria-hidden="true"></i></a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="khung3">
+        <div class="tren3">
+            <span class="icon3">
+                <i class="fa fa-shopping-cart"
+                   aria-hidden="true"></i>
+            </span>
+            <div class="socmt3">
+                <span class="sotren3">@ViewBag.total</span>
+                <p class="cmt3">Đơn hàng mới</p>
+            </div>
+        </div>
+        <div class="duoi3">
+            <div class="chu3">
+                <span class="xemCT3"><a href="#">Xem chi tiết</span><span class="iconD3">
+                    <i class="fa fa-arrow-circle-right"
+                       aria-hidden="true"></i></a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+<br />
+<h5>Đơn hàng mới</h5>
+<table class="table-primary">
+    <thead>
+        <tr>
+            <th style="width:19px">
+                Mã đơn hàng
+            </th>
+            <th>
+                Họ tên KH
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th style="width:35px">
+                Ngày đặt
+            </th>
+            <th>
+                Tình trạng
+            </th>
+            <th>
+                Tài khoản
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datesub)
+                </td>
+                @if (item.status == "Đang xử lý")
+                {
+                    <td>
+                        <p style="font-size:15px"> @Html.DisplayFor(modelItem => item.status)</p>
+                    </td>
+                }
+                else if (item.status == "Hoàn thành")
+                {
+                    <td>
+                        <p style="font-size:15px"> @Html.DisplayFor(modelItem => item.status)</p>
+                    </td>
+                }
+                else if (item.status == "Đã hủy")
+                {
+                    <td>
+                        <p style="font-size:15px"> @Html.DisplayFor(modelItem => item.status)</p>
+                    </td>
+                }
+                else if (item.status == "Đang giao")
+                {
+                    <td><p style="font-size:15px">@Html.DisplayFor(modelItem => item.status) </p></td>
+                }
+                else if (item.status == "Xác nhận...")
+                {
+                    <td><p style="font-size:15px">@Html.DisplayFor(modelItem => item.status) </p></td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.username)
+                </td>
+                <td>
+                    @Html.ActionLink("Chi tiết", "Dashboard", new { orderId = item.OrderId }, new { @class = "btn btn - info" })
+                    @if (item.status == "Đang xử lý")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.OrderId" class="btn btn-warning">Cập nhật</a>
+                    }
+                    else if (item.status == "Đang giao")
+                    {
+                        <a asp-action="Edit2" asp-route-id="@item.OrderId" class="btn btn-warning">Cập nhật</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+@if (Model.OrderDetail != null)
+{
+    decimal tt = 0;
+    int stt = 1;
+    <h6>Chi tiết đơn hàng @ViewBag.orderId</h6>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Hình ảnh</th>
+            <th>Sản phẩm</th>
+            <th>Giá bán</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+        </tr>
+
+        @foreach (var item in Model.OrderDetail)
+        {
+            var thanhtien = item.amount * item.price;
+            tt += ((decimal)thanhtien);
+            string selectedRow = "";
+            if (item.OrderId == ViewBag.orderId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>@(stt++)</td>
+                <td>
+                    <img style="width:150px" src="~/images/@item.Product.image_product" />
+                </td>
+                <td>
+                    @item.Product.name_product
+                </td>
+                <td>
+                    @(item.price.ToString("n0"))
+                </td>
+                <td>
+                    @item.amount
+                </td>
+                <td>@(thanhtien.ToString("n0"))</td>
+            </tr>
+        }
+        <tr>Tổng tiền: @(tt.ToString("n0"))</tr>
+
+    </table>
+}

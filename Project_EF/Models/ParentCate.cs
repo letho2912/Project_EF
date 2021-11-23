@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,8 @@ namespace Project_EF.Models
         public string name_prcate { get; set; }
         [DisplayName("Ảnh minh họa")]
         public string image_prcate { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public ICollection<Category> Category{ get; set; }
         public ICollection<Product> Product { get; set; }
 

@@ -157,6 +157,7 @@ namespace Project_EF.Areas.Admin.Controllers
                         }
                     }
                 }
+                cust.Product.date_add = DateTime.Now;
                 _context.Add(cust.Product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

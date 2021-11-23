@@ -108,9 +108,9 @@
 
             @foreach (var related in ViewBag.listrelated)
             {
-                <div class="product-main">
+                <div class="product-main" style="width:270px">
                     <div class="pro-wrap">
-                        <img src="~/images/silde/tải xuống.png" alt="Bàn làm việc">
+                        <img src="~/images/@related.image_product" alt="Bàn làm việc">
                         <div class="name-pro">@related.name_product</div>
                         @if (related.price != related.sale)
                         {

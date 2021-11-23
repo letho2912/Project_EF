@@ -40,12 +40,47 @@
     <nav>
         @await Component.InvokeAsync("Menu")
     </nav>
-        @RenderSection("slide",required:false)
+    @RenderSection("slide", required: false)
     <main>
         <div class="main-container">
             @RenderBody()
         </div>
     </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Về chúng tôi</h6>
+                    <p class="text-justify">
+                        Nội thất cao cấp <i> D&G </i>
+                        thấu hiểu được nhu cầu và thị hiếu của người tiêu dùng, tập thể chúng tôi luôn chú trọng đầu tư, thiết kế những sản phẩm chất lượng nhằm mang đến một không gian sống thật thoải mái,ấm cúng và tiện nghi cho người sử dụng.Đến với Nội thất Tuyên Tần, bạn hoàn toàn yên tâm để chọn được cho mình một bộ nội thất phù hợp nhất, kết hợp đầy đủ, hài hòa các yếu tố về màu sắc, kiểu dáng, kích thước để làm cho không gian ngôi nhà bạn trở nên ấn tượng bởi chúng tôi luôn luôn lắng nghe và giải đáp mọi thắc mắc, băn khoăn của khách hàng. Cùng với đó, chúng tôi cam kết bán hàng với mức giá luôn thấp hơn so với các sản phẩm cùng loại trên thị trường – vì không qua bất kì đại lý trung gian nào.
+                    </p>
+                </div>
+
+                <div class="col-md-2">
+                    <h6>Về chúng tôi</h6>
+                    <ul class="footer-links">
+                        <li>Chính sách bảo mật</li>
+                        <li>Điều khoản sử dụng</li>
+                        <li>Chính sách đổi trả</li>
+                        <li>Chính sách hoàn tiền</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h6>Kết nối với chúng tôi</h6>
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

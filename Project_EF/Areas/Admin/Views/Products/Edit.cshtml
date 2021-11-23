@@ -4,7 +4,8 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<h4> Sản phẩm @Model.name_product</h4>
+<hr />
 <form asp-action="Edit" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
@@ -20,7 +21,6 @@
             </div>
 
         </div>
-        <div class="col-md-1"></div>
         <div class="col-md-5">
             <div class="form-group">
                 <label asp-for="@Model.price" class="control-label"></label>
@@ -77,17 +77,20 @@
             <select hidden asp-for="@Model.deleted">
                 <option selected>False</option>
             </select>
-            <div class="form-group">
-                <input type="submit" value="Lưu" class="btn btn-primary" />
-            </div>
+            <div class="col-md-1"></div>
+
+        </div>
+        <br />
+
+    </div>
+    <div class="form-group">
+        <div style="float:left"><a asp-action="Index" class="btn btn-danger">Trở về</a></div>
+        <div style="float:right;padding-right:20px">
+            <input type="submit" value="Lưu" class="btn btn-primary" />
         </div>
     </div>
-
 </form>
 
-<div>
-    <a asp-action="Index">Trở về</a>
-</div>
 
 @section Script{
     <script>CKEDITOR.replace("describe")</script>
