@@ -1,0 +1,86 @@
+﻿@model PaginatedList<Project_EF.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Danh sách người dùng</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Tên đăng nhập
+            </th>
+            <th>
+                Địa chỉ email
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Tình trạng
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                @if (item.status == "Enable")
+                {
+                    <td>
+                        <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.Id">Vô hiệu</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-success" asp-action="EditEnable" asp-route-id="@item.Id">Kích hoạt</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+Trang @(Model.TotalPages < Model.PageIndex ? 0 : Model.PageIndex) / @Model.TotalPages
+<br />
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-primary @prevDisabled">
+    Trước
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-primary @nextDisabled">
+    Sau
+</a>

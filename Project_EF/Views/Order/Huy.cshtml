@@ -1,0 +1,14 @@
+﻿@model Project_EF.Models.Order
+
+<h3>Bạn muốn hủy đơn hàng này?</h3>
+<form asp-action="Huy">
+    <input type="hidden" asp-for="OrderId" />
+    <input type="submit" value="Đồng ý" class="btn btn-danger" />
+    <a class="btn btn-danger" asp-action="ListOrder">Trở về</a>
+</form>
+
+<p class="alert alert-danger">Lưu ý: Nếu bạn hủy đơn hàng không có lí do trên 5 lần, tài khoản của bạn sẽ bị khóa</p>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

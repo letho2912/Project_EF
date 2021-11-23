@@ -1,4 +1,7 @@
-﻿<html lang="en">
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -72,7 +75,7 @@
                             <p>Quản lý tài khoản</p>
                             <ul>
                                 <li>
-                                    <a asp-area="" asp-controller="Login" asp-action="User_role">
+                                    <a asp-area="Admin" asp-controller="Users" asp-action="Index">
                                         <i class="fa fa-user"
                                            aria-hidden="true"></i>Danh sách người dùng
                                     </a>
@@ -112,24 +115,30 @@
             <div class="pagewrap-right">
                 <div class="header-right">
                     <div class="dropdown-account">
-                        <a onclick="myFunction()" class="dropbtn">@ViewBag.displayname</a>
-                        <div id="myDropdown" class="dropdown-content">
-                            <div class="top-account">
-                                <div class="avt-account">
-                                    <img src="Image/tải xuống.png" alt="anh">
+                        @{
+                            var session = HttpContextAccessor.HttpContext.Session;
+                            string jsoncart = session.GetString(Project_EF.Areas.Admin.Controllers.AdminManageController.CARTKEY);
+                            string adminEmail = session.GetString(Project_EF.Areas.Admin.Controllers.AdminManageController.adminEmail);
+                            <a onclick="myFunction()" class="dropbtn">@jsoncart</a>
+
+                            <div id="myDropdown" class="dropdown-content">
+                                <div class="top-account">
+                                    <div class="avt-account">
+                                        <img src="https://haycafe.vn/wp-content/uploads/2021/11/anh-dai-dien-gau-nau-kha-ai.jpg" alt="anh">
+                                    </div>
+                                    <div class="inf-account">
+                                        <div class="displayname">@jsoncart</div>
+                                        <div class="email-account">@adminEmail</div>
+                                    </div>
                                 </div>
-                                <div class="inf-account">
-                                    <div class="displayname">@ViewBag.displayname</div>
-                                    <div class="email-account">@ViewBag.email</div>
+                                <div class="footer-account">
+                                    <a asp-area="Admin" asp-controller="AdminManage" asp-action="Logout">
+                                        <i class="zmdi zmdi-power"></i>Đăng xuất
+                                    </a>
                                 </div>
                             </div>
-                            <div class="footer-account">
-                                <a asp-area="Admin" asp-controller="AdminManage" asp-action="Logout">
-                                    <i class="zmdi zmdi-power"></i>Đăng xuất
-                                </a>
-                            </div>
+                            }
                         </div>
-                    </div>
                 </div>
                 <div class="main-content">
                     <div class="container">

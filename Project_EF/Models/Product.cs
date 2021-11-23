@@ -12,7 +12,6 @@ namespace Project_EF.Models
     public class Product
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         /*Id int identity primary key,
 name_product nvarchar(100),
 describe nvarchar(max),
@@ -57,5 +56,6 @@ CategoryId int,*/
         public string CategoryId { get; set; }
         public ParentCate ParentCate { get; set; }
         public Category Category { get; set; }
+        public IList<OrderDetail> OrderDetail { get; set; }
     }
 }

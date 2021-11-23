@@ -1,0 +1,98 @@
+﻿@model Project_EF.ViewModel.ProductCreateModel
+@{
+    ViewData["Title"] = "Danh sách đơn hàng";
+}
+@if (Model.Order.Count() > 0)
+{
+
+    <table class="table">
+        <tr>
+            <th>Mã đơn hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tình trạng</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Order)
+        {
+            string selectRow = "";
+            if (item.OrderId == ViewBag.orderId)
+            {
+                selectRow = "succsess";
+            }
+    <tr class="@selectRow">
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.datesub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        @if (item.status == "Đang xử lý")
+        {
+    <td>
+        @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId })
+        @Html.ActionLink("Hủy", "Huy", new { orderId = item.OrderId })
+    </td>
+        }
+        else
+        {
+    <td>
+        @Html.ActionLink("Chi tiết đơn hàng", "ListOrder", new { orderId = item.OrderId })
+    </td>
+        }
+    </tr>
+        }
+    </table>
+
+    @if (Model.OrderDetail != null)
+    {
+        decimal tt = 0;
+        int stt = 1;
+        <h3>Chi tiết đơn hàng @ViewBag.orderId</h3>
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Hình ảnh</th>
+                <th>Sản phẩm</th>
+                <th>Giá bán</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+
+            @foreach (var item in Model.OrderDetail)
+            {
+                var thanhtien = item.amount * item.price;
+                tt += ((decimal)thanhtien);
+                string selectedRow = "";
+                if (item.OrderId == ViewBag.orderId)
+                {
+                    selectedRow = "success";
+                }
+                <tr class="@selectedRow">
+                    <td>@(stt++)</td>
+                    <td>
+                        <img style="width:150px" src="~/images/@item.Product.image_product" />
+                    </td>
+                    <td>
+                        @item.Product.name_product
+                    </td>
+                    <td>
+                        @(item.price.ToString("n0"))
+                    </td>
+                    <td>
+                        @item.amount
+                    </td>
+                    <td>@(thanhtien.ToString("n0"))</td>
+                </tr>
+            }
+            <tr>Tổng tiền: @(tt.ToString("n0"))</tr>
+
+        </table>
+    }
+}
+else
+{
+    <p class="alert alert-danger">Bạn chưa có đơn hàng nào!</p>
+}

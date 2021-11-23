@@ -5,15 +5,12 @@
     <li><a asp-controller="Home" asp-action="Introducer" title="Giới thiệu">Giới thiệu</a></li>
     <li>
         <a href="#" title="Sản phẩm">Sản phẩm</a>
-        <!-- menu con sổ xuống cấp 1 -->
         <ul>
             @foreach (var prcate in Model)
             {
                 <li>
                     <a asp-area="" asp-action="ListProduct" asp-controller="Product"
                        asp-route-id="@prcate.Id" title="@prcate.name_prcate">@prcate.name_prcate</a>
-                    <!-- menu con sổ ngang cấp 2 -->
-
                     <ul>
                         @for (int i = 0; i < prcate.Category.Count; i++)
                         {
@@ -61,6 +58,7 @@
             <a href="#" title="@ViewBag.displayname">@ViewBag.displayname</a>
             <ul class="login">
                 <li><a asp-controller="User" asp-action="Login" title="Đăng nhập">Cài đặt</a></li>
+                <li><a asp-controller="Order" asp-action="ListOrder" asp-route-id="@ViewBag.username" title="Giỏ hàng">Đơn hàng</a></li>
                 <li><a asp-controller="User" asp-action="Logout" title="Đăng kí">Đăng xuất</a></li>
             </ul>
         </li>

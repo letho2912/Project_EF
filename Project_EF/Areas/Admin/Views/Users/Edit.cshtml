@@ -1,0 +1,44 @@
+﻿@model Project_EF.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Bạn có chắc muốn vô hiệu hóa tài khoản này không?</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Tên đăng nhập
+            </th>
+            <th>
+                Địa chỉ email
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.fullname</td>
+            <td>@Model.username</td>
+            <td>@Model.email</td>
+            <td>@Model.phone</td>
+        </tr>
+    </tbody>
+</table>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Đồng ý" class="btn btn-danger" />
+    <a class="btn btn-danger" asp-action="Index">Trở về</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Project_EF.Data;
 using Project_EF.Models;
 using Project_EF.ViewModel;
@@ -19,8 +20,6 @@ namespace Project_EF.Areas.Admin.Controllers
     {
         private readonly Connect _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
-
         public ProductsController(Connect context,IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
@@ -48,7 +47,7 @@ namespace Project_EF.Areas.Admin.Controllers
             }
 
 
-            var pr = _context.Product.Include(p => p.Category).Include(p => p.ParentCate).Where(s => s.deleted == "False").AsNoTracking();
+            var pr = _context.Product.Include(p => p.Category).Include(p => p.ParentCate).Where(s => s.deleted == "False").OrderByDescending(s=>s.Id).AsNoTracking();
 
             
             if (!String.IsNullOrEmpty(searchString))

@@ -63,48 +63,73 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                <img title="Hình ảnh sản phẩm" src="~/images/@item.image_product" width="90px" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name_product)
-            </td>
-            <td>
-                @Html.Raw(item.describe.Substring(0, 50))
-            </td>
-            <td>
-                @string.Format("{0:#,##0.##}", item.price)đ
-            </td>
-            <td>
-                @string.Format("{0:#,##0.##}", item.sale)đ
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quarantee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.material)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.producer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date_add)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentCate.name_prcate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.name_cate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <img title="Hình ảnh sản phẩm" src="~/images/@item.image_product" width="90px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_product)
+                </td>
+                <td>
+                    @Html.Raw(item.describe.Substring(0, 50))
+                </td>
+                <td>
+                    @string.Format("{0:#,##0.##}", item.price)đ
+                </td>
+                <td>
+                    @string.Format("{0:#,##0.##}", item.sale)đ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quarantee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.material)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.producer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_add)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentCate.name_prcate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.name_cate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+<div style="float:right">
+    Trang @(Model.TotalPages < Model.PageIndex ? 0 : Model.PageIndex) / @Model.TotalPages
+    <br />
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-primary @prevDisabled">
+        Trước
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-primary @nextDisabled">
+        Sau
+    </a>
+</div>
+

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Project_EF.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Quản lí đơn hàng</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.datesub)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                Tài khoản 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datesub)
+            </td>
+            @if (item.status == "Đang xử lý")
+            {
+                <td>
+                    <p style="font-size:15px" class="btn btn-info"> @Html.DisplayFor(modelItem => item.status)</p>
+                </td>
+                    }
+            else if(item.status == "Hoàn thành")
+            {
+                <td>
+                    <p style="font-size:15px" class="btn btn-success"> @Html.DisplayFor(modelItem => item.status)</p>
+                </td>
+                }
+            else if (item.status == "Đã hủy")
+            {
+                <td>
+                    <p style="font-size:15px" class="btn btn-danger"> @Html.DisplayFor(modelItem => item.status)</p>
+                </td>
+                    }
+                    else if (item.status == "Đang giao")
+                    {
+                    <td><p style = "font-size:15px" class="btn btn-warning">@Html.DisplayFor(modelItem => item.status) </p></td>
+                }
+            <td>
+                @Html.DisplayFor(modelItem => item.User.username)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

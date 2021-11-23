@@ -119,7 +119,7 @@ namespace Project_EF.Controllers
 
                 SaveCartSession(cart);
             }
-            return RedirectToAction(nameof(Cart));
+            return RedirectToAction("Index","Home");
         }
         // xóa sản phẩm trong giỏ hàng
         [Route("/removecart/{productid:int}", Name = "removecart")]
@@ -141,12 +141,11 @@ namespace Project_EF.Controllers
         [HttpPost]
         public IActionResult UpdateCart([FromForm] int productid, [FromForm] int quantity)
         {
-            // Cập nhật Cart thay đổi số lượng quantity ...
             var cart = GetCartItems();
             var cartitem = cart.Find(p => p.Product.Id == productid);
             if (cartitem != null)
-            {
-                cartitem.quantity = quantity;
+            {               
+                    cartitem.quantity = quantity;
             }
             SaveCartSession(cart);
             return Ok();
@@ -157,17 +156,48 @@ namespace Project_EF.Controllers
         [Route("/cart", Name = "cart")]
         public IActionResult Cart()
         {
-            var session = HttpContext.Session;
-            string jsoncart = session.GetString(CARTKEY);
-            ViewBag.jsoncart = jsoncart;
             return View(GetCartItems());
         }
 
-        [Route("/checkout")]
+        //[Route("/checkout")]
+        [HttpGet]
         public IActionResult CheckOut()
         {
             // Xử lý khi đặt hàng
             return View();
         }
+        public IActionResult Checkout(IFormCollection form)
+        {
+                var session = HttpContext.Session;
+                string user = session.GetString("userId");
+                if (user != null)
+                {
+                    var cart = GetCartItems();
+                    Order or = new Order();
+                    or.status = "Đang xử lý";
+                    or.datesub = DateTime.Now;
+                    or.UserId = int.Parse(user);
+                    or.fullname = form["fullname"];
+                    or.phone = form["phone"];
+                    or.email = form["email"];
+                    or.address = form["address"];
+                    _db.Order.Add(or);
+                    _db.SaveChanges();
+                    foreach (CartItem dt in cart)
+                    {
+                        OrderDetail ordt = new OrderDetail();
+                        ordt.OrderId = or.OrderId;
+                        ordt.ProductId = dt.Product.Id;
+                        ordt.price = dt.Product.sale;
+                        ordt.amount = dt.quantity;
+                        _db.OrderDetail.Add(ordt);
+                        _db.SaveChanges();
+                }
+                ClearCart();
+                return View("TB");
+            }
+            return View("Notices");
+        }
+        
     }
 }

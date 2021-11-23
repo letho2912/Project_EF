@@ -25,6 +25,7 @@ namespace Project_EF
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddDbContext<Connect>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("str_connect")));
@@ -63,7 +64,7 @@ namespace Project_EF
                    pattern: "Admin/{controller=ParentCate}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                   name: "default",
-                  pattern: "{controller=Products}/{action=Create}/{id?}");
+                  pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

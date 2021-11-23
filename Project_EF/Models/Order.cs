@@ -22,7 +22,7 @@ namespace Project_EF.Models
          */
         [Key]
         [DisplayName("Mã đơn hàng")]
-        public string Id { get; set; }
+        public int OrderId { get; set; }
         [DisplayName("Họ tên")]
         public string fullname { get; set; }
         [DisplayName("SĐT")]
@@ -37,11 +37,10 @@ namespace Project_EF.Models
         public DateTime datesub { get; set; }
         [DisplayName("Tình trạng")]
         public string status { get; set; }
-        [DisplayName("Tổng tiền")]
-        public double into { get; set; }
         [DisplayName("ID KH")]
         public int UserId { get; set; }
         public User User { get; set; }
+        public IList<OrderDetail> OrderDetail { get; set; }
 
     }
 }

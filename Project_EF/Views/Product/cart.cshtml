@@ -1,7 +1,5 @@
 ﻿@model List<Project_EF.Models.CartItem>
 
-<h2>GIỎ HÀNG</h2>
-
 @if (Model.Count > 0)
 {
     decimal total = 0;
@@ -10,8 +8,9 @@
     <table class="table">
         <tr>
             <th>#</th>
+            <th>Hình ảnh</th>
             <th>Sản phẩm</th>
-            <th>Giá</th>
+            <th>Giá khuyễn mãi</th>
             <th>Số lượng</th>
             <th>Thành tiền</th>
             <th></th>
@@ -23,9 +22,11 @@
 
             <tr>
                 <td>@(stt++)</td>
+                <td><img style="width:150px" src="~/images/@cartitem.Product.image_product" alt="Hình ảnh sản phẩm" /></td>
                 <td>@cartitem.Product.name_product</td>
                 <td>@(cartitem.Product.sale.ToString("n0"))</td>
-                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.Product.Id}")" /></td>
+                <td><input style="width:40px" asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.Product.Id}")" /></td>
+                <span asp-validation-for="@cartitem.quantity" class="text-danger">@ViewBag.quantity</span>
                 <td>@(thanhtien.ToString("n0"))</td>
                 <td>
                     <button class="btn btn-success updatecartitem"
@@ -38,13 +39,15 @@
             </tr>
         }
         <tr>
-            <td colspan="4" class="text-right">Tổng tiền</td>
+            <td colspan="5" class="text-right">Tổng tiền</td>
             <td>@(total.ToString("n0"))</td>
             <td></td>
         </tr>
     </table>
-
-    <a asp-controller="Product" asp-action="Checkout" class="btn btn-success">Gửi đơn hàng</a>
+    <div>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Tiếp tục mua hàng</a>
+        <a style="float:right;" asp-controller="Product" asp-action="Checkout" class="btn btn-success">Đặt hàng</a>
+    </div>
 
     @section Scripts {
         <script>

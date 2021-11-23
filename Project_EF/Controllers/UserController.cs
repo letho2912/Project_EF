@@ -68,7 +68,7 @@ namespace Project_EF.Controllers
                 if (us != null)
                 {
                     HttpContext.Session.SetString("displayname", us.fullname);
-                    HttpContext.Session.SetString("userId", us.Id.ToString());
+                HttpContext.Session.SetString("userId", us.Id.ToString());
                     return RedirectToAction("Index", "Home");
                 }
                 else

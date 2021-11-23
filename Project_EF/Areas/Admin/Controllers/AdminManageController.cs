@@ -15,7 +15,8 @@ namespace Project_EF.Areas.Admin.Controllers
     public class AdminManageController : Controller
     {
         private readonly Connect _context;
-
+        public const string CARTKEY = "cart";
+        public const string adminEmail = "email";
         public AdminManageController(Connect context)
         {
             _context = context;
@@ -30,9 +31,14 @@ namespace Project_EF.Areas.Admin.Controllers
             Admins us = _context.Admins.Where(s => s.username == user.username && s.password == user.password).FirstOrDefault();
             if (us != null)
             {
-                HttpContext.Session.SetString("displayname", us.displayname);
+                string displayname = us.displayname;
+                string email = us.email;
+                var session = HttpContext.Session;
+                session.SetString(CARTKEY, displayname);
+                session.SetString(adminEmail, email);
+                /*HttpContext.Session.SetString("displayname", us.displayname);
                 HttpContext.Session.SetString("email", us.email);
-                HttpContext.Session.SetString("adminId", us.Id.ToString());
+                HttpContext.Session.SetString("adminId", us.Id.ToString());*/
                 return RedirectToAction("Index", "Products");
             }
             else

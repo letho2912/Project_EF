@@ -118,37 +118,7 @@ namespace Project_EF.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(parentCate);
-        }
-
-        // GET: Admin/ParentCates/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var parentCate = await _context.ParentCate
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (parentCate == null)
-            {
-                return NotFound();
-            }
-
-            return View(parentCate);
-        }
-
-        // POST: Admin/ParentCates/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var parentCate = await _context.ParentCate.FindAsync(id);
-            _context.ParentCate.Remove(parentCate);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+        }       
         private bool ParentCateExists(string id)
         {
             return _context.ParentCate.Any(e => e.Id == id);

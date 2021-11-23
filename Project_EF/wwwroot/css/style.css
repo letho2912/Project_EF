@@ -194,7 +194,6 @@ main {
 .pagewrap {
     position: relative;
     margin: 0 auto;
-    z-index: 1;
 }
 
 h3.h3-title {
@@ -435,7 +434,7 @@ a.act {
 
 .description {
     margin: 15px 15px 20px 0px;
-    padding: 30px;
+    padding-top: 100px;
 }
 
 .detailsTitle {

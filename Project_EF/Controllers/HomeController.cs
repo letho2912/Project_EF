@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Project_EF.Data;
 using Project_EF.Models;
@@ -23,8 +24,14 @@ namespace Project_EF.Controllers
 
         public IActionResult Index()
         {
-            List<Product> product = _db.Product.OrderByDescending(b => b.date_add).Where(b=>b.deleted == "False").Take(4).ToList();
+            List<Product> product = _db.Product.OrderBy(b=>b.date_add).Where(b=>b.deleted == "False").Take(4).ToList();
             var saleProduct = _db.Product.Where(c => c.price > c.sale && c.deleted=="False").Take(4).ToList();
+            /*var query = _db.Product.Include(p=>p.OrderDetail)
+                .FromSqlRaw("SELECT TOP 3 WITH TIES name_product, sum(amount) " +
+                "FROM Product, OrderDetail WHERE Product.Id = OrderDetail.ProductId " +
+                "Group by name_product ORDER BY sum(amount) DESC")
+                .AsNoTracking().ToList();
+            ViewBag.sellProduct = query;*/
             ViewBag.saleProduct = saleProduct;
             return View("Index", product);
         }
