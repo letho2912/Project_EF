@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Project_EF.Models.News>       
+<style>
+            
+            
+            .main-new {
+                background: #e1e1e1;
+                margin-top: 15px;
+                padding-top: 10px;
+                width: 90%;
+                margin-left: 70px;
+                border: 1px solid #a1a1a1;
+            }
+
+            .left-news {
+                padding-top: 20px;
+                display: flex;
+                width: 90%;
+            }
+
+            .img-new {
+                width: 21%;
+            }
+
+            .content-news {
+                width: 70%;
+            }
+
+            .left-news img {
+                padding-left: 10px;
+                width: 170px;
+                height: auto;
+                padding-right: 0;
+                padding-bottom: 10px;
+            }
+
+            .right-news {
+                padding-right: 20px;
+                border: 1px solid #d8cb11;
+                width: 25%;
+            }
+
+                .right-news img {
+                    width: 170px;
+                }
+        </style>
+
+    <body>
+        <div class="main-new">
+            @foreach (var product in Model)
+            {
+                <div class="left-news">
+                    <div class="img-new">
+                        <img src="~/images/@product.image_new" alt="">
+                    </div>
+                    <div class="content-news">
+                        <a asp-controller="News" asp-action="Details" asp-route-id="@product.Id">@product.title</a>
+                        <br>
+                        <i>
+                            <b>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                @product.date_add
+                                <p>
+                                   Lệ Thơ
+                                </p>
+                            </b>
+                        </i>
+                        <p>
+                            @product.content
+                        </p>
+                    </div>
+                </div>
+            }
+            </div>
+    </body>
+

@@ -27,7 +27,7 @@
         </ul>
     </li>
     <li>
-        <a href="#" title="Tin tức">Tin tức</a>
+        <a asp-controller="News" asp-action="Index" title="Tin tức">Tin tức</a>
         <ul>
             <li><a href="#" title="Tin liên quan">Tin liên quan</a></li>
             <li><a href="#" title="Tin khuyến mãi">Tin khuyến mãi</a></li>
@@ -57,7 +57,7 @@
         <li class="displayname-account">
             <a href="#" title="@ViewBag.displayname">@ViewBag.displayname</a>
             <ul class="login">
-                <li><a asp-controller="User" asp-action="Login" title="Đăng nhập">Cài đặt</a></li>
+                <li><a asp-controller="User" asp-action="Setting" asp-route-id="@ViewBag.Id" title="Đăng nhập">Cài đặt</a></li>
                 <li><a asp-controller="Order" asp-action="ListOrder" asp-route-id="@ViewBag.username" title="Giỏ hàng">Đơn hàng</a></li>
                 <li><a asp-controller="User" asp-action="Logout" title="Đăng kí">Đăng xuất</a></li>
             </ul>

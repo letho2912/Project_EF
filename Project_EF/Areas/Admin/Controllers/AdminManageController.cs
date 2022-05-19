@@ -26,9 +26,9 @@ namespace Project_EF.Areas.Admin.Controllers
         {
             return View();
         }
-        public IActionResult Login(Admins user)
+        public IActionResult Login(Ad user)
         {
-            Admins us = _context.Admins.Where(s => s.username == user.username && s.password == user.password).FirstOrDefault();
+            Ad us = _context.Ad.Where(s => s.username == user.username && s.password == user.password).FirstOrDefault();
             if (us != null)
             {
                 string displayname = us.displayname;
@@ -50,41 +50,41 @@ namespace Project_EF.Areas.Admin.Controllers
         }
         public IActionResult User_Role()
         {
-            IEnumerable<Admins> objList = _context.Admins;
+            IEnumerable<Models.Ad> objList = _context.Ad;
             return View(objList);
         }
         /*Thêm nhân viên*/
         public IActionResult CreateUser()
         {
-            Admins login = new Admins();
+            Ad login = new Ad();
             return PartialView("_AddUser", login);
         }
         [HttpPost]
-        public IActionResult CreateUser(Admins obj)
+        public IActionResult CreateUser(Ad obj)
         {
-            _context.Admins.Add(obj);
+            _context.Ad.Add(obj);
             _context.SaveChanges();
             return RedirectToAction("User_role");
         }
         // GET: Admin/Products/Delete/5
         public IActionResult Edit(int? id)
         {
-            var b = _context.Admins.Find(id);
+            var b = _context.Ad.Find(id);
             return PartialView("_UpdateCate", b);
         }
 
         // POST: Admin/Products/Delete/5
         [HttpPost]
-        public IActionResult Edit(Admins obj)
+        public IActionResult Edit(Models.Ad obj)
         {
-            _context.Admins.Update(obj);
+            _context.Ad.Update(obj);
             _context.SaveChanges();
             return PartialView("_UpdateCate", obj);
     }
 
         private bool AdminsExists(int id)
         {
-            return _context.Admins.Any(e => e.Id == id);
+            return _context.Ad.Any(e => e.Id == id);
         }
     }
 }

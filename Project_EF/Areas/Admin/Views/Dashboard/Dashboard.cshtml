@@ -175,7 +175,7 @@
                     @Html.ActionLink("Chi tiết", "Dashboard", new { orderId = item.OrderId }, new { @class = "btn btn - info" })
                     @if (item.status == "Đang xử lý")
                     {
-                        <a asp-action="Edit" asp-route-id="@item.OrderId" class="btn btn-warning">Cập nhật</a>
+                        <a asp-action="Edit" asp-controller="Orders" asp-route-id="@item.OrderId" class="btn btn-warning">Xác nhận</a>
                     }
                     else if (item.status == "Đang giao")
                     {

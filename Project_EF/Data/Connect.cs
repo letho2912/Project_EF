@@ -18,8 +18,9 @@ namespace Project_EF.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<Admins> Admins { get; set; }
+        public DbSet<Ad> Ad { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<News> News { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }     
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,4 +43,5 @@ namespace Project_EF.Data
 
             }
         }
-      }
+    
+}

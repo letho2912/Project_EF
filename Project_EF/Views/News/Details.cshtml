@@ -1,0 +1,17 @@
+﻿@model Project_EF.Models.News
+<div class="link-all">
+<div class="main-container">
+    <div class="mainDetails">
+        <div class="mainProduct">
+            <div class="detailsProduct">
+                <div class="imgProduct">
+                    <img class="d-block w-100"
+                         src="~/images/@Html.DisplayFor(model => model.image_new)"
+                         alt="Hình ảnh thiết kế nội thất">
+                </div>
+                @Html.DisplayFor(model => model.content)
+            </div>           
+        </div>
+    </div>
+</div>
+</div>

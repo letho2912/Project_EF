@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project_EF.Data;
 using Project_EF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Project_EF.Controllers
@@ -68,7 +70,7 @@ namespace Project_EF.Controllers
                 if (us != null)
                 {
                     HttpContext.Session.SetString("displayname", us.fullname);
-                HttpContext.Session.SetString("userId", us.Id.ToString());
+                    HttpContext.Session.SetString("userId", us.Id.ToString());
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -77,6 +79,7 @@ namespace Project_EF.Controllers
                     return View();
                 }
         }
+       
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
